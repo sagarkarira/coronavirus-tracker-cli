@@ -2,7 +2,7 @@
 
 Track coronavirus from cli
 
-## Screenshots
+## Screenshot
 
 <img src="./screenshot.jpg" width="720" height="450">
 
