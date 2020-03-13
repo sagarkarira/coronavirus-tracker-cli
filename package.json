@@ -1,0 +1,22 @@
+{
+  "name": "coronavirus-tracker-cli",
+  "version": "0.1.0",
+  "description": "track conronavirus cases from cli",
+  "main": "./lib/corona.js",
+  "bin": {
+    "corona": "./bin/index.js"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "sagarkarira1992@gmail.com",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.19.2",
+    "chalk": "^3.0.0",
+    "cli-table3": "^0.5.1",
+    "emoji-flags": "^1.2.0",
+    "humanize-number": "0.0.2",
+    "lodash": "^4.17.15"
+  }
+}
