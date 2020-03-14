@@ -26,8 +26,9 @@ corona
 
 ### ToDos
 
-* Gets stats by country.
-* Add growth rate / daily change.
+* Filter by country to get cases by local states.
+* ~~Add daily change.~~
+* Add growth rate. (linear regression)
 * Add latest updates from reddit / twitter.
 
 ## License
