@@ -4,7 +4,7 @@ Track coronavirus from cli
 
 ## Screenshot
 
-<img src="https://i.ibb.co/wYyB8XG/screenshot.png" width="960" height="720">
+<img src="https://i.ibb.co/cxJkRHf/screenshot.png" width="960" height="720">
 
 ### Prerequisites
 
