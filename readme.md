@@ -4,7 +4,7 @@ Track coronavirus from cli
 
 ## Screenshot
 
-<img src="./screenshot.png" width="960" height="720">
+<img src="https://i.ibb.co/wYyB8XG/screenshot.png" width="960" height="720">
 
 ### Prerequisites
 
@@ -32,6 +32,6 @@ corona
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+This project is licensed under the MIT License
 
 
