@@ -28,8 +28,8 @@ Italy: `curl https://corona-stats.online/Italy`
 
 ### Thanks to
 
-* [Covid-19 Data](https://github.com/CSSEGISandData/COVID-19)
-* [Covid-19 Data API](https://github.com/ExpDev07/coronavirus-tracker-api) for the api.
+* [CSSEGISandData](https://github.com/CSSEGISandData/COVID-19) for the data.
+* [ExpDev07](https://github.com/ExpDev07/coronavirus-tracker-api) for the api.
 * [Zeit Now](https://github.com/zeit/now) for hosting.
 
 ### Related Projects
