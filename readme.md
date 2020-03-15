@@ -6,27 +6,22 @@ Track coronavirus from cli
 
 <img src="https://i.ibb.co/cxJkRHf/screenshot.png" width="960" height="720">
 
-### Prerequisites
+## Curl
 
-* node
-* npm
+All: `curl https://corona-stats.online/`
 
+Country wise: `curl https://corona-stats.online/<country>`
 
-### Installing
+Example:
 
-```
-npm install coronavirus-tracker-cli -g
-```
+US: `curl https://corona-stats.online/US`
 
-### Running
-
-```
-corona
-```
+Italy: `curl https://corona-stats.online/Italy`
 
 ### ToDos
 
-* Filter by country to get cases by local states.
+* ~~Filter by country to get cases by local states.~~
+* ~~Move from npm to curl~~
 * ~~Add daily change.~~
 * Add growth rate. (linear regression)
 * Add latest updates from reddit / twitter.

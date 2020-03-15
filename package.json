@@ -7,16 +7,23 @@
     "corona": "./bin/index.js"
   },
   "scripts": {
+    "start": "node app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "engines": {
+    "node": "12.x"
   },
   "author": "sagarkarira1992@gmail.com",
   "license": "ISC",
   "dependencies": {
+    "ansi-to-html": "^0.6.14",
     "axios": "^0.19.2",
     "chalk": "^3.0.0",
     "cli-table3": "^0.5.1",
     "emoji-flags": "^1.2.0",
+    "express": "^4.17.1",
     "humanize-number": "0.0.2",
-    "lodash": "^4.17.15"
+    "lodash": "^4.17.15",
+    "moment": "^2.24.0"
   }
 }
