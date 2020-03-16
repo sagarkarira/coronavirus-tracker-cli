@@ -1,5 +1,6 @@
 const express = require('express');
 const app = express();
+const lookup = require('country-code-lookup');
 
 const port = process.env.PORT || 3001;
 
@@ -22,6 +23,7 @@ app.get('/', (req, res) => {
 
 app.get('/:country', (req, res) => {
   const { country } = req.params;
+  let lookupObj = null;
   const format = req.query.format ? req.query.format : '';
 
   if (!country || country === 'all') {
@@ -36,13 +38,32 @@ app.get('/:country', (req, res) => {
     }).catch(error => res.send(error));
   }
 
+  try {
+    lookupObj = lookup.byIso(country)
+      || lookup.byFips(country)
+      || lookup.byCountry(country);
+  } catch (error) {
+    lookupObj = lookup.byFips(country) || lookup.byCountry(country);
+  }
+  if (!lookupObj) {
+    return res.send(`
+    Country not found.
+    Try full country name or country code.
+    Ex:
+      - /UK: for United Kingdom
+      - /US: for United States of America.
+      - /India: for India.
+    `);
+  }
+  const { iso2 } = lookupObj;
+
   if (format.toLowerCase() === 'json') {
-    return getJSONDataForCountry(country).then(result => {
+    return getJSONDataForCountry(iso2).then(result => {
       return res.json(result);
     }).catch(error => res.send(error));
   }
-  
-  return getCountryTable(country).then(result => {
+
+  return getCountryTable(iso2).then(result => {
     return res.send(result);
   }).catch(error => res.send(error));
 });
