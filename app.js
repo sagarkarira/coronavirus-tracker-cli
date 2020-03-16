@@ -5,14 +5,8 @@ const port = process.env.PORT || 3001;
 
 const { getCountryTable } = require('./lib/byCountry');
 const { getCompleteTable } = require('./lib/corona');
+const { countryUpperCase } = require('./lib/helpers');
 
-const countryUpperCase = (countryParams) => {
-    if(countryParams.country.length > 2 ){
-      const country =  countryParams.country.toLowerCase().split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
-      return { country };
-    }
-  return countryParams;
-};
 
 app.get('/', (req, res) => {
   return getCompleteTable().then(result => {
