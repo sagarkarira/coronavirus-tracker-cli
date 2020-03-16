@@ -1,4 +1,4 @@
-# cornavirus-tracker-cli
+# coronavirus-tracker-cli
 
 Track coronavirus from cli
 
