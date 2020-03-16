@@ -7,18 +7,23 @@ const port = process.env.PORT || 3001;
 const { getCountryTable, getJSONData, getJSONDataForCountry } = require('./lib/byCountry');
 const { getCompleteTable } = require('./lib/corona');
 
+function errorHandler(error, res) {
+  console.error(error);
+  return res.send('I am sorry. Something went wrong. Please report it');
+}
+
 app.get('/', (req, res) => {
   const format = req.query.format ? req.query.format : '';
 
   if (format.toLowerCase() === 'json') {
     return getJSONData().then(result => {
       return res.json(result);
-    }).catch(error => res.send(error));
+    }).catch(error => errorHandler(error, res));
   }
 
   return getCompleteTable().then(result => {
     return res.send(result);
-  }).catch(error => res.send(error));
+  }).catch(error => errorHandler(error, res));
 });
 
 app.get('/:country', (req, res) => {
@@ -30,12 +35,12 @@ app.get('/:country', (req, res) => {
     if (format.toLowerCase() === 'json') {
       return getJSONData().then(result => {
         return res.json(result);
-      }).catch(error => res.send(error));
+      }).catch(error => errorHandler(error, res));
     }
 
     return getCompleteTable().then(result => {
       return res.send(result);
-    }).catch(error => res.send(error));
+    }).catch(error => errorHandler(error, res));
   }
 
   try {
@@ -60,12 +65,12 @@ app.get('/:country', (req, res) => {
   if (format.toLowerCase() === 'json') {
     return getJSONDataForCountry(iso2).then(result => {
       return res.json(result);
-    }).catch(error => res.send(error));
+    }).catch(error => errorHandler(error, res));
   }
 
   return getCountryTable(iso2).then(result => {
     return res.send(result);
-  }).catch(error => res.send(error));
+  }).catch(error => errorHandler(error, res));
 });
 
 
