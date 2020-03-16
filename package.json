@@ -7,6 +7,7 @@
     "corona": "./bin/index.js"
   },
   "scripts": {
+    "dev": "nodemon app.js",
     "start": "node app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -25,5 +26,8 @@
     "humanize-number": "0.0.2",
     "lodash": "^4.17.15",
     "moment": "^2.24.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.2"
   }
 }
