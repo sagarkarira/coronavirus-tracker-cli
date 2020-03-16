@@ -27,6 +27,7 @@
     "humanize-number": "0.0.2",
     "lodash": "^4.17.15",
     "moment": "^2.24.0",
+    "morgan": "^1.9.1",
     "node-cache": "^5.1.0"
   },
   "devDependencies": {

@@ -1,6 +1,7 @@
 const express = require('express');
 const app = express();
 const lookup = require('country-code-lookup');
+const morgan = require('morgan');
 
 const port = process.env.PORT || 3001;
 
@@ -12,16 +13,20 @@ function errorHandler(error, res) {
   return res.send('I am sorry. Something went wrong. Please report it');
 }
 
+app.use(morgan(':remote-addr :remote-user :method :url :status :res[content-length] - :response-time ms'));
+
 app.get('/', (req, res) => {
   const format = req.query.format ? req.query.format : '';
 
   if (format.toLowerCase() === 'json') {
     return getJSONData().then(result => {
+      res.setHeader('Cache-Control', 's-maxage=86400');
       return res.json(result);
     }).catch(error => errorHandler(error, res));
   }
 
   return getCompleteTable().then(result => {
+    res.setHeader('Cache-Control', 's-maxage=900');
     return res.send(result);
   }).catch(error => errorHandler(error, res));
 });
@@ -34,11 +39,13 @@ app.get('/:country', (req, res) => {
   if (!country || country === 'all') {
     if (format.toLowerCase() === 'json') {
       return getJSONData().then(result => {
+        res.setHeader('Cache-Control', 's-maxage=900');
         return res.json(result);
       }).catch(error => errorHandler(error, res));
     }
 
     return getCompleteTable().then(result => {
+      res.setHeader('Cache-Control', 's-maxage=900');
       return res.send(result);
     }).catch(error => errorHandler(error, res));
   }
@@ -64,11 +71,13 @@ app.get('/:country', (req, res) => {
 
   if (format.toLowerCase() === 'json') {
     return getJSONDataForCountry(iso2).then(result => {
+      res.setHeader('Cache-Control', 's-maxage=900');
       return res.json(result);
     }).catch(error => errorHandler(error, res));
   }
 
   return getCountryTable(iso2).then(result => {
+    res.setHeader('Cache-Control', 's-maxage=900');
     return res.send(result);
   }).catch(error => errorHandler(error, res));
 });
