@@ -42,7 +42,7 @@ curl https://corona-stats.online?format=json
 **Install**
 
 ```
-npm install corona-tracker-cli -g
+npm install coronavirus-tracker-cli -g
 ```
 
 **Run command**
