@@ -7,6 +7,8 @@ const port = process.env.PORT || 3001;
 
 const { getCountryTable, getJSONData, getJSONDataForCountry } = require('./lib/byCountry');
 const { getCompleteTable } = require('./lib/corona');
+const { countryUpperCase } = require('./lib/helpers');
+
 
 function errorHandler(error, res) {
   console.error(error);
@@ -32,17 +34,19 @@ app.get('/', (req, res) => {
 });
 
 app.get('/:country', (req, res) => {
-  const { country } = req.params;
+  
+  const { country } = countryUpperCase(req.params);
   let lookupObj = null;
   const format = req.query.format ? req.query.format : '';
 
-  if (!country || country === 'all') {
+  if (!country || country === 'All') {
     if (format.toLowerCase() === 'json') {
       return getJSONData().then(result => {
         res.setHeader('Cache-Control', 's-maxage=900');
         return res.json(result);
       }).catch(error => errorHandler(error, res));
     }
+
 
     return getCompleteTable().then(result => {
       res.setHeader('Cache-Control', 's-maxage=900');
