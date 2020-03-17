@@ -15,6 +15,11 @@ function errorHandler(error, res) {
 
 app.use(morgan(':remote-addr :remote-user :method :url :status :res[content-length] - :response-time ms'));
 
+app.use((req, res, next) => {
+  res.setHeader('Content-Type', 'text/plain');
+  next();
+});
+
 app.get('/', (req, res) => {
   const format = req.query.format ? req.query.format : '';
 
