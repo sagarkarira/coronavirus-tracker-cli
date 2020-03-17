@@ -22,7 +22,7 @@ app.get('/', (req, res) => {
 
   if (format.toLowerCase() === 'json') {
     return getJSONData().then(result => {
-      res.setHeader('Cache-Control', 's-maxage=86400');
+      res.setHeader('Cache-Control', 's-maxage=900');
       return res.json(result);
     }).catch(error => errorHandler(error, res));
   }
@@ -34,7 +34,6 @@ app.get('/', (req, res) => {
 });
 
 app.get('/:country', (req, res) => {
-  
   const { country } = countryUpperCase(req.params);
   let lookupObj = null;
   const format = req.query.format ? req.query.format : '';

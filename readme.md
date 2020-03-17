@@ -6,17 +6,50 @@ Track coronavirus from cli
 
 <img src="https://i.ibb.co/cxJkRHf/screenshot.png" width="960" height="720">
 
-## Curl
+## CURL
 
-All: `curl https://corona-stats.online/`
+### Complete Data
 
-Country wise: `curl https://corona-stats.online/<country>`
+```
+curl https://corona-stats.online/
+```
 
-Example:
+### Filter by Country Stats
 
-US: `curl https://corona-stats.online/US`
+```
+curl https://corona-stats.online/<country>
+```
 
-Italy: `curl https://corona-stats.online/Italy`
+where <country> can be country name or its ISO code.
+
+- US: ```curl https://corona-stats.online/US```
+- Italy: ```curl https://corona-stats.online/Italy```
+- UK: ```curl https://corona-stats.online/UK``` or ```curl https://corona-stats.online/GB```
+
+
+## API
+
+Add `?format=json` at the end of any API to get json formatted data.
+
+**Example:**
+
+```
+curl https://corona-stats.online?format=json
+```
+
+## Local Command (For coloured ouput)
+
+**Install**
+
+```
+npm install corona-tracker-cli -g
+```
+
+**Run command**
+
+```
+corona
+```
 
 ### ToDos
 
@@ -25,6 +58,15 @@ Italy: `curl https://corona-stats.online/Italy`
 * ~~Add daily change.~~
 * Add growth rate. (linear regression)
 * Add latest updates from reddit / twitter.
+
+### Other Regional Trackers.
+
+* [Italy](http://opendatadpc.maps.arcgis.com/apps/opsdashboard/index.html#/b0c68bce2cce478eaac82fe38d4138b1)
+* [India](https://www.covid19india.org/)
+* [USA](https://www.npr.org/sections/health-shots/2020/03/16/816707182/map-tracking-the-spread-of-the-coronavirus-in-the-u-s)
+* [France](https://veille-coronavirus.fr/)
+* [Japan](https://covid19japan.com/)
+
 
 ### Thanks to
 
@@ -40,4 +82,4 @@ Italy: `curl https://corona-stats.online/Italy`
 
 ## License
 
-This project is licensed under the MIT License
+[WTFPL](http://www.wtfpl.net/)
