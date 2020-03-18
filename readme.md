@@ -54,7 +54,7 @@ corona
 **With emojis**
 
 ````sh
-corona -e
+corona --emojis
 ````
 
 **Filter by country**
@@ -90,11 +90,10 @@ corona | grep -B 23 ' 10  '
 
 ```
  project  : curl-corona
- lines    :     2821
+ lines    :     2837
  authors  :
- 2343 sagark                    83.1%
-  293 Alexandra Parker          10.4%
-  120 Not Committed Yet         4.3%
+ 2479 Sagar Karira              87.4%
+  293 Alexandra Parker          10.3%
    30 Lucas Fernandez Nicolau   1.1%
    25 Shelton Koskie            0.9%
     6 Mo'men Tawfik             0.2%
