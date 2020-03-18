@@ -47,10 +47,6 @@ const {argv} = require('yargs')
   .strict()
   .help('help');
 
-console.log(argv);
-
-const {emojis, country} = argv;
-
 (country === 'all' ? getCompleteTable(argv) : getCountryTable(country, argv))
   .then(console.log)
   .catch(console.error);
