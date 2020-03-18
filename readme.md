@@ -66,7 +66,7 @@ corona italy
 **Disable colors**
 
 ````sh
-corona --colors=false
+corona --color=false
 ````
 
 **Top 10** (Working on native command)
