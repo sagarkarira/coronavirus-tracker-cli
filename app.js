@@ -7,7 +7,7 @@ const port = process.env.PORT || 3001;
 
 const { getCountryTable, getJSONData, getJSONDataForCountry } = require('./lib/byCountry');
 const { getCompleteTable } = require('./lib/corona');
-const { countryUpperCase } = require('./lib/helpers');
+const { countryUpperCase, lookupCountry } = require('./lib/helpers');
 
 
 function errorHandler(error, res) {
@@ -34,11 +34,10 @@ app.get('/', (req, res) => {
 });
 
 app.get('/:country', (req, res) => {
-  const { country } = countryUpperCase(req.params);
-  let lookupObj = null;
+  const { country } = req.params;
   const format = req.query.format ? req.query.format : '';
 
-  if (!country || country === 'All') {
+  if (!country || 'ALL' === country.toUpperCase()) {
     if (format.toLowerCase() === 'json') {
       return getJSONData().then(result => {
         res.setHeader('Cache-Control', 's-maxage=900');
@@ -53,13 +52,8 @@ app.get('/:country', (req, res) => {
     }).catch(error => errorHandler(error, res));
   }
 
-  try {
-    lookupObj = lookup.byIso(country)
-      || lookup.byFips(country)
-      || lookup.byCountry(country);
-  } catch (error) {
-    lookupObj = lookup.byFips(country) || lookup.byCountry(country);
-  }
+  let lookupObj = lookupCountry(country);
+
   if (!lookupObj) {
     return res.send(`
     Country not found.
@@ -70,6 +64,7 @@ app.get('/:country', (req, res) => {
       - /India: for India.
     `);
   }
+
   const { iso2 } = lookupObj;
 
   if (format.toLowerCase() === 'json') {

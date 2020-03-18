@@ -51,31 +51,31 @@ npm install coronavirus-tracker-cli -g
 corona
 ````
 
-**Top 10**
+**With emojis**
+
+````sh
+corona --emojis
+````
+
+**Filter by country**
+
+````sh
+corona italy
+````
+
+**Disable colors**
+
+````sh
+corona --colors=false
+````
+
+**Top 10** (Working on native command)
 
 Note: This command will cause colored output to be discarded.
 
 ````sh
 # Grep the rank of 10 and the 23 lines preceding it
 corona | grep -B 23 ' 10  '
-````
-
-**Your country**
-
-Note: These commands will cause colored output to be discarded.
-
-- Replace the `US` part of the command with your country code.
-- If you want to also see the `World` stats, replace the `3` with a `5`
-````sh
-# sed the first 3 (or 5) lines; your country; bottom table border
-corona | sed -n '1,3p;/\(US\)/p;/╚═/p'
-````
-
-Or, get your country within context of your rank
-````sh
-# grep with 2 lines of context for each result
-# output the 'World' stats and headers; the country stats; the bottom table border
-corona | grep --color=none -C 2 -e 'World' -e '\(US\)' -e 'Stay'
 ````
 
 ### ToDos
@@ -85,6 +85,21 @@ corona | grep --color=none -C 2 -e 'World' -e '\(US\)' -e 'Stay'
 * ~~Add daily change.~~
 * Add growth rate. (linear regression)
 * Add latest updates from reddit / twitter.
+
+### Contributors
+
+```
+ project  : curl-corona
+ lines    :     2837
+ authors  :
+ 2479 Sagar Karira              87.4%
+  293 Alexandra Parker          10.3%
+   30 Lucas Fernandez Nicolau   1.1%
+   25 Shelton Koskie            0.9%
+    6 Mo'men Tawfik             0.2%
+    3 XhmikosR                  0.1%
+    1 CyberDracula              0.0%
+```
 
 ### Other Regional Trackers.
 
