@@ -19,6 +19,7 @@ app.use(morgan(':remote-addr :remote-user :method :url :status :res[content-leng
 
 app.get('/', (req, res) => {
   const format = req.query.format ? req.query.format : '';
+  const top = req.query.top ? Number(req.query.top) : 300;
 
   if (format.toLowerCase() === 'json') {
     return getJSONData().then(result => {
@@ -27,7 +28,7 @@ app.get('/', (req, res) => {
     }).catch(error => errorHandler(error, res));
   }
 
-  return getCompleteTable().then(result => {
+  return getCompleteTable(max=top).then(result => {
     res.setHeader('Cache-Control', 's-maxage=900');
     return res.send(result);
   }).catch(error => errorHandler(error, res));
