@@ -1,5 +1,9 @@
 # Changelog
 
+## Version 0.6.0
+
+* Added filter to show top N countries. ``corona --top=20``
+
 ## Version 0.5.0
 
 * Added minimal / comapct table command. ``corona --minimal``

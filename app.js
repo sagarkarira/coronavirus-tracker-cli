@@ -9,6 +9,7 @@ const port = process.env.PORT || 3001;
 const { getCountryTable, getJSONData, getJSONDataForCountry } = require('./lib/byCountry');
 const { getCompleteTable } = require('./lib/corona');
 const { lookupCountry } = require('./lib/helpers');
+const { getLiveUpdates } = require('./lib/reddit.js');
 
 
 function errorHandler(error, res) {
@@ -26,23 +27,13 @@ app.use((req, res, next) => {
 });
 
 
-+app.get('/updates', (req, res) => {
-  const format = req.query.format ? req.query.format : '';
-  if (format.toLowerCase() === 'json') {
-    return getLiveUpdates(true).then(result => {
-      return res.json(result);
-    }).catch(error => errorHandler(error, res));
-  }
-  return getLiveUpdates(false).then(result => {
-    return res.send(result);
-  }).catch(error => errorHandler(error, res));
-});
 
 app.get('/', (req, res) => {
   const isCurl = req.headers['user-agent'].match(/\bcurl\b/gmi) !== null;
   const format = req.query.format ? req.query.format : '';
   const minimal = req.query.minimal === 'true' ? true : false;
   const emojis = req.query.emojis === 'true' ? true : false;
+  const top = req.query.top ? Number(req.query.top) : 1000;
 
   if (format.toLowerCase() === 'json') {
     return getJSONData().then(result => {
@@ -50,10 +41,23 @@ app.get('/', (req, res) => {
     }).catch(error => errorHandler(error, res));
   }
 
-  return getCompleteTable({ isCurl, emojis, minimal })
+  return getCompleteTable({ isCurl, emojis, minimal, top })
     .then(result => {
       return res.send(result);
     }).catch(error => errorHandler(error, res));
+});
+
+app.get('/updates', (req, res) => {
+  const format = req.query.format ? req.query.format : '';
+  const isCurl = req.headers['user-agent'].match(/\bcurl\b/gmi) !== null;
+  if (format.toLowerCase() === 'json') {
+    return getLiveUpdates({ json: true, isCurl }).then(result => {
+      return res.json(result);
+    }).catch(error => errorHandler(error, res));
+  }
+  return getLiveUpdates({ json: false, isCurl }).then(result => {
+    return res.send(result);
+  }).catch(error => errorHandler(error, res));
 });
 
 app.get('/:country', (req, res) => {

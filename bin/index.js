@@ -44,18 +44,24 @@ const { argv } = yargs
     },
     m: {
       alias: 'minimal',
-      describe: 'remove borders and padding from table',
+      describe: 'Remove borders & padding from table',
       type: 'boolean',
       default: false,
+    },
+    t: {
+      alias: 'top',
+      describe: 'Filter table by rank',
+      type: 'int'
     }
   })
   .strict()
   .help('help');
 
-const { emojis, country, minimal } = argv;
+
+const { emojis, country, minimal, top } = argv;
 (
   country === 'ALL'
-    ? getCompleteTable({ emojis, minimal })
+    ? getCompleteTable({ emojis, minimal, top })
     : getCountryTable({ countryCode: country, emojis, minimal })
 )
   .then(console.log)

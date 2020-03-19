@@ -32,6 +32,18 @@ where <country> can be country name or its ISO code.
 curl https://corona-stats.online?minimal=true
 ````
 
+**Only show top N countries**
+
+```sh
+curl https://corona-stats.online?top=20
+```
+
+**Latest News (Work in Progress)**
+
+```sh
+curl https://corona-stats.online/updates
+```
+
 ## API
 
 Add `?format=json` at the end of any API to get json formatted data.
@@ -52,15 +64,22 @@ npm install coronavirus-tracker-cli -g
 
 **Run command**
 
-````sh
+```sh
 corona
-````
+```
 
 **Filter by country**
 
-````sh
+```sh
 corona italy
-````
+```
+
+**Top N countries**
+
+```sh
+corona --top=10
+```
+
 **With emojis**
 
 ````sh
@@ -77,15 +96,6 @@ corona --minimal
 
 ````sh
 corona --color=false
-````
-
-**Top 10** (Working on native command)
-
-Note: This command will cause colored output to be discarded.
-
-````sh
-# Grep the rank of 10 and the 23 lines preceding it
-corona | grep -B 23 ' 10  '
 ````
 
 ### ToDos
