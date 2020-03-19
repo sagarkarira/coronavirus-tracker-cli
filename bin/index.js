@@ -1,6 +1,5 @@
 #!/usr/bin/env node
-const yargonaut = require('yargonaut')
-  .style('green');
+const yargonaut = require('yargonaut').style('green');
 const yargs = require('yargs');
 const chalk = require('chalk');
 const { getCompleteTable } = require('../lib/corona');
@@ -8,7 +7,7 @@ const { getCountryTable } = require('../lib/byCountry');
 const { lookupCountry } = require('../lib/helpers');
 
 const { argv } = yargs
-  .command('$0 [country]','Tool to COVID-19 statistics for the world or the given country', yargs =>
+  .command('$0 [country]','Tool to track COVID-19 statistics for the world or the given country', yargs =>
     yargs.positional('country', {
       coerce(arg) {
         if ('ALL' === arg.toUpperCase()) {
@@ -50,8 +49,8 @@ const { argv } = yargs
 const { emojis, country } = argv;
 (
   country === 'ALL'
-    ? getCompleteTable(emojis)
-    : getCountryTable(country, emojis)
+    ? getCompleteTable({emojis})
+    : getCountryTable({ countryCode: country, emojis })
 )
   .then(console.log)
   .catch(console.error);

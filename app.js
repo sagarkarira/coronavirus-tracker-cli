@@ -16,38 +16,40 @@ function errorHandler(error, res) {
 }
 
 app.use(morgan(':remote-addr :remote-user :method :url :status :res[content-length] - :response-time ms'));
+app.use((req, res, next) => {
+  res.setHeader('Cache-Control', 'no-cache');
+  next();
+});
 
 app.get('/', (req, res) => {
+  const isCurl = req.headers['user-agent'].match(/\bcurl\b/gmi) !== null;
   const format = req.query.format ? req.query.format : '';
 
   if (format.toLowerCase() === 'json') {
     return getJSONData().then(result => {
-      res.setHeader('Cache-Control', 's-maxage=900');
       return res.json(result);
     }).catch(error => errorHandler(error, res));
   }
 
-  return getCompleteTable().then(result => {
-    res.setHeader('Cache-Control', 's-maxage=900');
+  return getCompleteTable({ isCurl }).then(result => {
     return res.send(result);
   }).catch(error => errorHandler(error, res));
 });
 
 app.get('/:country', (req, res) => {
   const { country } = req.params;
+  const isCurl = req.headers['user-agent'].match(/\bcurl\b/gmi) !== null;
   const format = req.query.format ? req.query.format : '';
 
   if (!country || 'ALL' === country.toUpperCase()) {
     if (format.toLowerCase() === 'json') {
       return getJSONData().then(result => {
-        res.setHeader('Cache-Control', 's-maxage=900');
         return res.json(result);
       }).catch(error => errorHandler(error, res));
     }
 
 
-    return getCompleteTable().then(result => {
-      res.setHeader('Cache-Control', 's-maxage=900');
+    return getCompleteTable({ isCurl }).then(result => {
       return res.send(result);
     }).catch(error => errorHandler(error, res));
   }
@@ -69,13 +71,11 @@ app.get('/:country', (req, res) => {
 
   if (format.toLowerCase() === 'json') {
     return getJSONDataForCountry(iso2).then(result => {
-      res.setHeader('Cache-Control', 's-maxage=900');
       return res.json(result);
     }).catch(error => errorHandler(error, res));
   }
 
-  return getCountryTable(iso2).then(result => {
-    res.setHeader('Cache-Control', 's-maxage=900');
+  return getCountryTable({ countryCode: iso2, isCurl }).then(result => {
     return res.send(result);
   }).catch(error => errorHandler(error, res));
 });
