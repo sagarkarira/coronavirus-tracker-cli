@@ -18,6 +18,7 @@ function errorHandler(error, res) {
 app.use(morgan(':remote-addr :remote-user :method :url :status :res[content-length] - :response-time ms'));
 
 app.get('/', (req, res) => {
+  const isCurl = req.headers['user-agent'].match(/\bcurl\b/gmi) !== null
   const format = req.query.format ? req.query.format : '';
 
   if (format.toLowerCase() === 'json') {
@@ -27,7 +28,7 @@ app.get('/', (req, res) => {
     }).catch(error => errorHandler(error, res));
   }
 
-  return getCompleteTable().then(result => {
+  return getCompleteTable({isCurl}).then(result => {
     res.setHeader('Cache-Control', 's-maxage=900');
     return res.send(result);
   }).catch(error => errorHandler(error, res));

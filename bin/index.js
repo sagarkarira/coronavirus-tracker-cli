@@ -50,7 +50,7 @@ const { argv } = yargs
 const { emojis, country } = argv;
 (
   country === 'ALL'
-    ? getCompleteTable(emojis)
+    ? getCompleteTable({emojis})
     : getCountryTable(country, emojis)
 )
   .then(console.log)
