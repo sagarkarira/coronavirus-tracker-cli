@@ -11,7 +11,7 @@ Track The Corona virus from your CLI
 ### Complete Data
 
 ````sh
-curl https://corona-stats.online/
+curl https://corona-stats.online
 ````
 
 ### Filter by Country Stats
@@ -26,6 +26,11 @@ where <country> can be country name or its ISO code.
 - Italy: ```curl https://corona-stats.online/Italy```
 - UK: ```curl https://corona-stats.online/UK``` or ```curl https://corona-stats.online/GB```
 
+**Minimal Compact Table**
+
+````sh
+curl https://corona-stats.online?minimal=true
+````
 
 ## API
 
@@ -51,16 +56,21 @@ npm install coronavirus-tracker-cli -g
 corona
 ````
 
+**Filter by country**
+
+````sh
+corona italy
+````
 **With emojis**
 
 ````sh
 corona --emojis
 ````
 
-**Filter by country**
+**Minimal Compact Table**
 
 ````sh
-corona italy
+corona --minimal
 ````
 
 **Disable colors**
@@ -90,14 +100,16 @@ corona | grep -B 23 ' 10  '
 
 ```
  project  : curl-corona
- lines    :     2837
+ lines    :     2984
  authors  :
- 2479 Sagar Karira              87.4%
-  293 Alexandra Parker          10.3%
-   30 Lucas Fernandez Nicolau   1.1%
-   25 Shelton Koskie            0.9%
-    6 Mo'men Tawfik             0.2%
+ 2617 Sagar Karira              87.7%
+  283 Alexandra Parker          9.5%
+   29 Lucas Fernandez Nicolau   1.0%
+   25 Shelton Koskie            0.8%
+   21 Daniel S                  0.7%
+    4 Mo'men Tawfik             0.1%
     3 XhmikosR                  0.1%
+    1 Greg Myers                0.0%
     1 CyberDracula              0.0%
 ```
 
