@@ -12,7 +12,7 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "engines": {
-    "node": "12.x"
+    "node": ">=12.x"
   },
   "author": "sagarkarira1992@gmail.com",
   "license": "ISC",
