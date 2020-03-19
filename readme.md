@@ -1,4 +1,4 @@
-# coronavirus-tracker-cli
+# coronavirus-tracker-cli [![Build Status](https://github.com/sagarkarira/coronavirus-tracker-cli/workflows/Tests/badge.svg)](https://github.com/sagarkarira/coronavirus-tracker-cli/actions?workflow=Tests)
 
 Track The Corona virus from your CLI
 
