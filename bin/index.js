@@ -7,7 +7,7 @@ const { getCountryTable } = require('../lib/byCountry');
 const { lookupCountry } = require('../lib/helpers');
 
 const { argv } = yargs
-  .command('$0 [country]','Tool to track COVID-19 statistics for the world or the given country', yargs =>
+  .command('$0 [country]','Tool to track COVID-19 statistics from terminal', yargs =>
     yargs.positional('country', {
       coerce(arg) {
         if ('ALL' === arg.toUpperCase()) {
@@ -41,16 +41,22 @@ const { argv } = yargs
       alias: 'color',
       describe: 'Show colors formatted output',
       type: 'boolean'
+    },
+    m: {
+      alias: 'minimal',
+      describe: 'remove borders and padding from table',
+      type: 'boolean',
+      default: false,
     }
   })
   .strict()
   .help('help');
 
-const { emojis, country } = argv;
+const { emojis, country, minimal } = argv;
 (
   country === 'ALL'
-    ? getCompleteTable({emojis})
-    : getCountryTable({ countryCode: country, emojis })
+    ? getCompleteTable({ emojis, minimal })
+    : getCountryTable({ countryCode: country, emojis, minimal })
 )
   .then(console.log)
   .catch(console.error);
