@@ -17,8 +17,9 @@
   },
   "scripts": {
     "dev": "nodemon --inspect app.js",
+    "lint": "eslint .",
     "start": "node app.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "npm run lint"
   },
   "engines": {
     "node": "12.x"
@@ -43,6 +44,7 @@
     "yargs": "15.3.1"
   },
   "devDependencies": {
+    "eslint": "^6.8.0",
     "nodemon": "^2.0.2"
   }
 }
