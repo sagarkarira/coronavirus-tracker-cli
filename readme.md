@@ -39,6 +39,8 @@ curl https://corona-stats.online?format=json
 
 ## Local Command (For coloured ouput)
 
+We recommend NodeJS version 12 which you can download [here](https://nodejs.org/en/download/).
+
 **Install**
 
 ````sh
