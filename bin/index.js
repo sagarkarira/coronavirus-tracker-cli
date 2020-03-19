@@ -42,15 +42,20 @@ const { argv } = yargs
       alias: 'color',
       describe: 'Show colors formatted output',
       type: 'boolean'
+    },
+    t: {
+      alias: 'top',
+      describe: 'Filter table by rank',
+      type: 'int'
     }
   })
   .strict()
   .help('help');
 
-const { emojis, country } = argv;
+const { top, emojis, country } = argv;
 (
   country === 'ALL'
-    ? getCompleteTable(emojis)
+    ? getCompleteTable(top, emojis)
     : getCountryTable(country, emojis)
 )
   .then(console.log)
