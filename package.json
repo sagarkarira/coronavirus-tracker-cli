@@ -27,7 +27,6 @@
   "author": "sagarkarira1992@gmail.com",
   "license": "ISC",
   "dependencies": {
-    "ansi-to-html": "^0.6.14",
     "axios": "^0.19.2",
     "chalk": "^3.0.0",
     "cli-table3": "^0.5.1",
@@ -40,7 +39,6 @@
     "morgan": "^1.9.1",
     "node-cache": "^5.1.0",
     "strip-ansi": "^6.0.0",
-    "yargonaut": "^1.1.4",
     "yargs": "15.3.1"
   },
   "devDependencies": {

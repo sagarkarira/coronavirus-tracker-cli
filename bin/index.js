@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-const yargonaut = require('yargonaut').style('green');
+
 const yargs = require('yargs');
 const chalk = require('chalk');
 const { getCompleteTable } = require('../lib/corona');
@@ -7,12 +7,13 @@ const { getCountryTable } = require('../lib/byCountry');
 const { lookupCountry } = require('../lib/helpers');
 
 const { argv } = yargs
-  .command('$0 [country]','Tool to track COVID-19 statistics from terminal', yargs =>
+  .command('$0 [country]', 'Tool to track COVID-19 statistics from terminal', yargs =>
     yargs.positional('country', {
       coerce(arg) {
-        if ('ALL' === arg.toUpperCase()) {
+        if (arg.toUpperCase() === 'ALL') {
           return 'ALL';
         }
+
         const country = lookupCountry(arg);
         if (!country) {
           let error = `Country '${arg}' not found.\n`;
@@ -23,6 +24,7 @@ const { argv } = yargs
           error += '- Italy: for Italy.\n';
           throw new Error(chalk.red.bold(error));
         }
+
         return country.iso2;
       },
       describe: 'Filter table by country',
@@ -56,7 +58,6 @@ const { argv } = yargs
   })
   .strict()
   .help('help');
-
 
 const { emojis, country, minimal, top } = argv;
 (
