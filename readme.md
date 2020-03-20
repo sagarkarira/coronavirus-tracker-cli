@@ -4,7 +4,7 @@ Track The Corona virus from your CLI
 
 ## Screenshot
 
-<img src="./preview.png" alt="Preview" width="639">
+<img src="./preview.png" alt="Preview" width="920">
 
 ## CURL
 
@@ -110,17 +110,18 @@ corona --color=false
 
 ```
  project  : curl-corona
- lines    :     2984
+ lines    :     3991
  authors  :
- 2617 Sagar Karira              87.7%
-  283 Alexandra Parker          9.5%
-   29 Lucas Fernandez Nicolau   1.0%
-   25 Shelton Koskie            0.8%
-   21 Daniel S                  0.7%
+  3342 Sagar Karira             83.7%
+  356 XhmikosR                  8.9%
+  232 Alexandra Parker          5.8%
+   26 Lucas Fernandez Nicolau   0.7%
+   13 Daniel S                  0.3%
+   10 Shelton Koskie            0.3%
+    5 Sabu Siyad                0.1%
     4 Mo'men Tawfik             0.1%
-    3 XhmikosR                  0.1%
+    2 Steven                    0.1%
     1 Greg Myers                0.0%
-    1 CyberDracula              0.0%
 ```
 
 ## Other Regional Trackers.
