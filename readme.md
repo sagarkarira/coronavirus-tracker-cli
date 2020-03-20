@@ -4,7 +4,7 @@ Track The Corona virus from your CLI
 
 ## Screenshot
 
-<img src="https://raw.githubusercontent.com/sagarkarira/coronavirus-tracker-cli/master/preview.png" alt="Preview" width="639">
+<img src="./preview.png" alt="Preview" width="639">
 
 ## CURL
 
