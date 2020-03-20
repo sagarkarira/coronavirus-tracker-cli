@@ -8,7 +8,7 @@ const { getLiveUpdates } = require('./lib/reddit.js');
 
 const app = express();
 const port = process.env.PORT || 3001;
-const IS_CURL_RE = /\bcurl\b/gim;
+const IS_CURL_RE = /\bcurl\b/im;
 
 function errorHandler(error, res) {
   console.error(error);
