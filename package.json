@@ -17,7 +17,7 @@
   },
   "scripts": {
     "dev": "nodemon --inspect app.js",
-    "lint": "eslint .",
+    "lint": "xo",
     "start": "node app.js",
     "test": "npm run lint"
   },
@@ -50,6 +50,25 @@
   },
   "devDependencies": {
     "eslint": "^6.8.0",
-    "nodemon": "^2.0.2"
+    "nodemon": "^2.0.2",
+    "xo": "^0.28.2"
+  },
+  "xo": {
+    "space": 2,
+    "rules": {
+      "arrow-parens": "off",
+      "capitalized-comments": "off",
+      "no-negated-condition": "off",
+      "object-curly-spacing": [
+        "error",
+        "always"
+      ],
+      "promise/prefer-await-to-then": "off",
+      "quote-props": "off",
+      "space-before-function-paren": "off",
+      "unicorn/filename-case": "off",
+      "unicorn/prevent-abbreviations": "off",
+      "unicorn/string-content": "off"
+    }
   }
 }
