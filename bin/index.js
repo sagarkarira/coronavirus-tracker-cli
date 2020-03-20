@@ -57,7 +57,7 @@ const { argv } = yargs
       alias: 'minimal',
       describe: 'Remove borders & padding from table',
       type: 'boolean',
-      default: false,
+      default: false
     },
     t: {
       alias: 'top',
@@ -68,12 +68,12 @@ const { argv } = yargs
       alias: 'graph',
       describe: 'Get graph',
       type: 'boolean',
-      default: false,
+      default: false
     },
     st: {
       alias: 'states',
       describe: 'Get state level data of country ',
-      type: 'string',
+      type: 'string'
     }
   })
   .strict()
@@ -91,6 +91,7 @@ if (argv.states) {
     error += '- Italy: for Italy.\n';
     throw new Error(chalk.red.bold(error));
   }
+
   argv.countryCode = country.iso2;
   if (argv.countryCode === 'US') {
     getUsaStats(argv).then(result => {
@@ -105,12 +106,11 @@ if (argv.states) {
 
 if (argv.source === 1) {
   (
-    argv.country === 'ALL'
-      ? getCompleteTable(argv)
-      : getCountryTable(argv)
+    argv.country === 'ALL' ?
+      getCompleteTable(argv) :
+      getCountryTable(argv)
   ).then(console.log).catch(console.error);
-}
-else if (argv.graph === true) {
+} else if (argv.graph === true) {
   getGraph(argv).then(console.log).catch(console.error);
 } else {
   getWorldoMetersTable(argv).then(console.log).catch(console.error);

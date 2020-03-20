@@ -6,7 +6,7 @@ const chalk = require('chalk');
 const {
   getCountryTable,
   getJSONData,
-  getJSONDataForCountry,
+  getJSONDataForCountry
 } = require('./lib/byCountry');
 const { getCompleteTable, getGraph } = require('./lib/corona');
 const { lookupCountry, htmlTemplate, footer } = require('./lib/helpers');
@@ -24,11 +24,12 @@ function errorHandler(error, req, res) {
   const body = `
     I am sorry. Something went wrong. Please report it\n
     ${error.message}
-    ${footer(new Date)}
+    ${footer(new Date())}
   `;
   if (req.isCurl) {
     return body;
   }
+
   return res.status(500).send(htmlTemplate(body));
 }
 
@@ -58,7 +59,7 @@ app.use((req, res, next) => {
 });
 
 app.get('/', (req, res) => {
-  const isCurl = req.isCurl;
+  const { isCurl } = req;
   const format = req.query.format ? req.query.format : '';
   const minimal = req.query.minimal === 'true';
   const emojis = req.query.emojis === 'true';
@@ -78,15 +79,14 @@ app.get('/', (req, res) => {
       }).catch(error => errorHandler(error, req, res));
   }
 
-  return getWorldoMetersTable({ isCurl, emojis, minimal, top, format})
+  return getWorldoMetersTable({ isCurl, emojis, minimal, top, format })
     .then(result => {
       return res.send(result);
     }).catch(error => errorHandler(error, req, res));
-
 });
 
 app.get('/updates', (req, res) => {
-  const isCurl = req.isCurl;
+  const { isCurl } = req;
   const format = req.query.format ? req.query.format : '';
 
   if (format.toLowerCase() === 'json') {
@@ -102,33 +102,36 @@ app.get('/updates', (req, res) => {
 
 app.get(['/:country/graph', '/graph'], (req, res) => {
   const { country } = req.params;
-  const isCurl = req.isCurl;
+  const { isCurl } = req;
   if (!country) {
     return getGraph({ isCurl })
       .then(result => res.send(result))
       .catch(error => errorHandler(error, req, res));
   }
+
   const lookupObj = lookupCountry(country);
 
   if (!lookupObj) {
     return res.status(404).send(countryNotFound(isCurl));
   }
-  return getGraph({countryCode: lookupObj.iso2, isCurl })
+
+  return getGraph({ countryCode: lookupObj.iso2, isCurl })
     .then(result => res.send(result))
     .catch(error => errorHandler(error, req, res));
 });
 
 app.get('/help', (req, res) => {
-  const isCurl = req.isCurl;
+  const { isCurl } = req;
   if (!isCurl) {
     return res.send(htmlTemplate(helpContent));
   }
+
   return res.send(chalk.green(helpContent));
 });
 
 app.get('/states/:country', (req, res) => {
   const { country } = req.params;
-  const isCurl = req.isCurl;
+  const { isCurl } = req;
   const format = req.query.format ? req.query.format : '';
   const minimal = req.query.minimal === 'true';
   const top = req.query.top ? Number(req.query.top) : 1000;
@@ -138,18 +141,18 @@ app.get('/states/:country', (req, res) => {
   if (!lookupObj) {
     return res.status(404).send(stateCountryNotFound(isCurl));
   }
+
   if (lookupObj.iso2 === 'US') {
-    return getUsaStats({ isCurl, minimal, top, format})
+    return getUsaStats({ isCurl, minimal, top, format })
       .then(result => {
         return res.send(result);
       }).catch(error => errorHandler(error, req, res));
   }
 });
 
-
 app.get('/:country', (req, res) => {
   const { country } = req.params;
-  const isCurl = req.isCurl;
+  const { isCurl } = req;
   const format = req.query.format ? req.query.format : '';
   const minimal = req.query.minimal === 'true';
   const emojis = req.query.emojis === 'true';
@@ -167,12 +170,14 @@ app.get('/:country', (req, res) => {
         return res.send(result);
       }).catch(error => errorHandler(error, req, res));
   }
+
   if (source === 1) {
     const lookupObj = lookupCountry(country);
 
     if (!lookupObj) {
       return res.status(404).send(countryNotFound(isCurl));
     }
+
     const { iso2 } = lookupObj;
 
     if (format.toLowerCase() === 'json') {
@@ -180,6 +185,7 @@ app.get('/:country', (req, res) => {
         return res.json(result);
       }).catch(error => errorHandler(error, req, res));
     }
+
     return getCountryTable({ countryCode: iso2, isCurl, emojis, minimal })
       .then(result => {
         return res.send(result);

@@ -22,7 +22,8 @@
     "test": "npm run lint"
   },
   "files": [
-    "{bin,lib}/*.js",
+    "bin/*.js",
+    "lib/*.js",
     "app.js"
   ],
   "engines": {
