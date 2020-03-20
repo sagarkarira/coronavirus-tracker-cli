@@ -8,6 +8,7 @@ const { getLiveUpdates } = require('./lib/reddit.js');
 
 const app = express();
 const port = process.env.PORT || 3001;
+const IS_CURL_RE = /\bcurl\b/gim;
 
 function errorHandler(error, res) {
   console.error(error);
@@ -24,7 +25,7 @@ app.use((req, res, next) => {
 });
 
 app.get('/', (req, res) => {
-  const isCurl = req.headers['user-agent'].match(/\bcurl\b/gim) !== null;
+  const isCurl = IS_CURL_RE.test(req.headers['user-agent']);
   const format = req.query.format ? req.query.format : '';
   const minimal = req.query.minimal === 'true';
   const emojis = req.query.emojis === 'true';
@@ -43,8 +44,9 @@ app.get('/', (req, res) => {
 });
 
 app.get('/updates', (req, res) => {
+  const isCurl = IS_CURL_RE.test(req.headers['user-agent']);
   const format = req.query.format ? req.query.format : '';
-  const isCurl = req.headers['user-agent'].match(/\bcurl\b/gim) !== null;
+
   if (format.toLowerCase() === 'json') {
     return getLiveUpdates({ json: true, isCurl }).then(result => {
       return res.json(result);
@@ -58,10 +60,11 @@ app.get('/updates', (req, res) => {
 
 app.get('/:country', (req, res) => {
   const { country } = req.params;
-  const isCurl = req.headers['user-agent'].match(/\bcurl\b/gim) !== null;
+  const isCurl = IS_CURL_RE.test(req.headers['user-agent']);
   const format = req.query.format ? req.query.format : '';
   const minimal = req.query.minimal === 'true';
   const emojis = req.query.emojis === 'true';
+
   if (!country || country.toUpperCase() === 'ALL') {
     if (format.toLowerCase() === 'json') {
       return getJSONData().then(result => {
