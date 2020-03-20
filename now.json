@@ -1,23 +1,23 @@
 {
   "version": 2,
   "builds": [
-      {
-          "src": "*.js",
-          "use": "@now/node"
-      }
+    {
+      "src": "*.js",
+      "use": "@now/node"
+    }
   ],
   "routes": [
-      {
-          "headers": {
-              "Access-Control-Allow-Origin": "*",
-              "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
-              "Access-Control-Allow-Headers": "X-Requested-With, Content-Type, Accept"
-          },
-          "src": "/.*",
-          "dest": "/app.js"
-      }
+    {
+      "headers": {
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
+        "Access-Control-Allow-Headers": "X-Requested-With, Content-Type, Accept"
+      },
+      "src": "/.*",
+      "dest": "/app.js"
+    }
   ],
   "env": {
-      "VERSION": "1.0.0"
+    "VERSION": "1.0.0"
   }
 }
