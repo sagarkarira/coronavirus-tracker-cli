@@ -13,14 +13,14 @@ const IS_CURL_RE = /\bcurl\b/gim;
 function errorHandler(error, res) {
   console.error(error);
   return res.send(`
-    I am sorry. Something went wrong. Please report it \n
+    I am sorry. Something went wrong. Please report it\n
     ${error.message}
   `);
 }
 
 app.use(morgan(':remote-addr :remote-user :method :url :status :res[content-length] - :response-time ms'));
 app.use((req, res, next) => {
-  res.setHeader('Cache-Control', 'no-cache');
+  res.setHeader('Cache-Control', 'public, max-age=0, must-revalidate');
   next();
 });
 
