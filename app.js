@@ -1,4 +1,5 @@
 const express = require('express');
+const helmet = require('helmet');
 const morgan = require('morgan');
 const chalk = require('chalk');
 
@@ -26,6 +27,22 @@ function errorHandler(error, res) {
 }
 
 app.set('json escape', true);
+
+app.use(helmet({
+  dnsPrefetchControl: false,
+  frameguard: {
+    action: 'deny'
+  }
+}));
+
+app.use(helmet.hsts({
+  force: true,
+  includeSubDomains: true,
+  maxAge: 63072000, // 2 years
+  preload: true
+}));
+
+app.use(helmet.referrerPolicy({ policy: 'strict-origin-when-cross-origin' }));
 
 app.use(morgan(':remote-addr :remote-user :method :url :status :res[content-length] - :response-time ms'));
 app.use((req, res, next) => {

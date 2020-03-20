@@ -38,6 +38,7 @@
     "country-code-lookup": "0.0.16",
     "emoji-flags": "^1.2.0",
     "express": "^4.17.1",
+    "helmet": "^3.21.3",
     "humanize-number": "0.0.2",
     "lodash": "^4.17.15",
     "moment": "^2.24.0",
