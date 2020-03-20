@@ -1,7 +1,6 @@
 #!/usr/bin/env node
 
-// eslint-disable-next-line no-unused-vars
-const yargonaut = require('yargonaut').style('green');
+require('yargonaut').style('green');
 const yargs = require('yargs');
 const chalk = require('chalk');
 const { getCompleteTable } = require('../lib/corona');
