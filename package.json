@@ -17,8 +17,9 @@
   },
   "scripts": {
     "dev": "nodemon --inspect app.js",
+    "lint": "eslint .",
     "start": "node app.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "npm run lint"
   },
   "engines": {
     "node": "12.x"
@@ -26,7 +27,6 @@
   "author": "sagarkarira1992@gmail.com",
   "license": "ISC",
   "dependencies": {
-    "ansi-to-html": "^0.6.14",
     "axios": "^0.19.2",
     "chalk": "^3.0.0",
     "cli-table3": "^0.5.1",
@@ -43,6 +43,7 @@
     "yargs": "15.3.1"
   },
   "devDependencies": {
+    "eslint": "^6.8.0",
     "nodemon": "^2.0.2"
   }
 }

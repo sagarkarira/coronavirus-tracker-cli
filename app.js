@@ -1,16 +1,13 @@
 const express = require('express');
-const app = express();
-const lookup = require('country-code-lookup');
 const morgan = require('morgan');
-const stripAnsi = require('strip-ansi');
-
-const port = process.env.PORT || 3001;
 
 const { getCountryTable, getJSONData, getJSONDataForCountry } = require('./lib/byCountry');
 const { getCompleteTable } = require('./lib/corona');
 const { lookupCountry } = require('./lib/helpers');
 const { getLiveUpdates } = require('./lib/reddit.js');
 
+const app = express();
+const port = process.env.PORT || 3001;
 
 function errorHandler(error, res) {
   console.error(error);
@@ -26,13 +23,11 @@ app.use((req, res, next) => {
   next();
 });
 
-
-
 app.get('/', (req, res) => {
-  const isCurl = req.headers['user-agent'].match(/\bcurl\b/gmi) !== null;
+  const isCurl = req.headers['user-agent'].match(/\bcurl\b/gim) !== null;
   const format = req.query.format ? req.query.format : '';
-  const minimal = req.query.minimal === 'true' ? true : false;
-  const emojis = req.query.emojis === 'true' ? true : false;
+  const minimal = req.query.minimal === 'true';
+  const emojis = req.query.emojis === 'true';
   const top = req.query.top ? Number(req.query.top) : 1000;
 
   if (format.toLowerCase() === 'json') {
@@ -49,12 +44,13 @@ app.get('/', (req, res) => {
 
 app.get('/updates', (req, res) => {
   const format = req.query.format ? req.query.format : '';
-  const isCurl = req.headers['user-agent'].match(/\bcurl\b/gmi) !== null;
+  const isCurl = req.headers['user-agent'].match(/\bcurl\b/gim) !== null;
   if (format.toLowerCase() === 'json') {
     return getLiveUpdates({ json: true, isCurl }).then(result => {
       return res.json(result);
     }).catch(error => errorHandler(error, res));
   }
+
   return getLiveUpdates({ json: false, isCurl }).then(result => {
     return res.send(result);
   }).catch(error => errorHandler(error, res));
@@ -62,11 +58,11 @@ app.get('/updates', (req, res) => {
 
 app.get('/:country', (req, res) => {
   const { country } = req.params;
-  const isCurl = req.headers['user-agent'].match(/\bcurl\b/gmi) !== null;
+  const isCurl = req.headers['user-agent'].match(/\bcurl\b/gim) !== null;
   const format = req.query.format ? req.query.format : '';
-  const minimal = req.query.minimal === 'true' ? true : false;
-  const emojis = req.query.emojis === 'true' ? true : false;
-  if (!country || 'ALL' === country.toUpperCase()) {
+  const minimal = req.query.minimal === 'true';
+  const emojis = req.query.emojis === 'true';
+  if (!country || country.toUpperCase() === 'ALL') {
     if (format.toLowerCase() === 'json') {
       return getJSONData().then(result => {
         return res.json(result);
@@ -79,13 +75,13 @@ app.get('/:country', (req, res) => {
       }).catch(error => errorHandler(error, res));
   }
 
-  let lookupObj = lookupCountry(country);
+  const lookupObj = lookupCountry(country);
 
   if (!lookupObj) {
     return res.send(`
     Country not found.
-    Try full country name or country code.
-    Ex:
+    Try the full country name or country code.
+    Example:
       - /UK: for United Kingdom
       - /US: for United States of America.
       - /Italy: for Italy.
@@ -105,6 +101,5 @@ app.get('/:country', (req, res) => {
       return res.send(result);
     }).catch(error => errorHandler(error, res));
 });
-
 
 app.listen(port, () => console.log(`Running on ${port}`));
