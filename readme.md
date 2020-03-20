@@ -4,7 +4,7 @@ Track The Corona virus from your CLI
 
 ## Screenshot
 
-<img src="https://i.ibb.co/cxJkRHf/screenshot.png" width="960" height="720">
+<img src="https://raw.githubusercontent.com/sagarkarira/coronavirus-tracker-cli/master/preview.png" alt="Preview" width="639">
 
 ## CURL
 
@@ -20,7 +20,7 @@ curl https://corona-stats.online
 curl https://corona-stats.online/<country>
 ```
 
-where \<country\> can be country name or its ISO code.
+where \<country\> can be a country name or its ISO code.
 
 * US: `curl https://corona-stats.online/US`
 * Italy: `curl https://corona-stats.online/Italy`
