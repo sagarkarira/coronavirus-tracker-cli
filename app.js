@@ -22,7 +22,7 @@ app.set('json escape', true);
 
 app.use(morgan(':remote-addr :remote-user :method :url :status :res[content-length] - :response-time ms'));
 app.use((req, res, next) => {
-  res.setHeader('Cache-Control', 'public, max-age=0, must-revalidate');
+  res.setHeader('Cache-Control', 'no-cache');
   next();
 });
 
