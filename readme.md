@@ -61,7 +61,9 @@ curl https://corona-stats.online?format=json
 
 ## Local Command (For coloured output)
 
-### Install
+Note: NodeJS version 12 recommended. You can download it [here](https://nodejs.org/en/download/).
+
+**Install**
 
 ``` sh
 npm install coronavirus-tracker-cli -g
