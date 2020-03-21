@@ -5,6 +5,7 @@ const yargs = require('yargs');
 const chalk = require('chalk');
 const { getCompleteTable } = require('../lib/corona');
 const { getCountryTable } = require('../lib/byCountry');
+const { getWorldoMetersTable } = require('../lib/worldoMeters');
 const { lookupCountry } = require('../lib/helpers');
 
 const { argv } = yargs
@@ -34,6 +35,12 @@ const { argv } = yargs
     })
   )
   .options({
+    s: {
+      alias: 'source',
+      describe: 'fetch data from other source',
+      default: 1,
+      type: 'int'
+    },
     e: {
       alias: 'emojis',
       describe: 'Show emojis in table',
@@ -60,11 +67,17 @@ const { argv } = yargs
   .strict()
   .help('help');
 
-const { emojis, country, minimal, top } = argv;
-(
-  country === 'ALL'
-    ? getCompleteTable({ emojis, minimal, top })
-    : getCountryTable({ countryCode: country, emojis, minimal })
-)
-  .then(console.log)
-  .catch(console.error);
+argv.countryCode = argv.country;
+if (argv.source === 2) {
+  getWorldoMetersTable(argv)
+    .then(console.log)
+    .catch(console.error);
+} else {
+  (
+    argv.country === 'ALL'
+      ? getCompleteTable(argv)
+      : getCountryTable(argv)
+  )
+    .then(console.log)
+    .catch(console.error);
+}
