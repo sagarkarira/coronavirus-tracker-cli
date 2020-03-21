@@ -1,5 +1,10 @@
 # Changelog
 
+## Version 0.7.0
+
+* Added new source to fetch realtime data. ``corona --source=2``
+* Code refactored and some bug fixes.
+
 ## Version 0.6.0
 
 * Added filter to show top N countries. ``corona --top=20``
