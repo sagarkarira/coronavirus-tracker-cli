@@ -1,86 +1,117 @@
-# coronavirus-tracker-cli
+# coronavirus-tracker-cli [![Build Status](https://github.com/sagarkarira/coronavirus-tracker-cli/workflows/Tests/badge.svg)](https://github.com/sagarkarira/coronavirus-tracker-cli/actions?workflow=Tests)
 
 Track The Corona virus from your CLI
 
 ## Screenshot
 
-<img src="https://i.ibb.co/cxJkRHf/screenshot.png" width="960" height="720">
+![Preview](./preview.png)
 
 ## CURL
 
 ### Complete Data
 
-````sh
-curl https://corona-stats.online/
-````
+```sh
+curl https://corona-stats.online
+```
 
 ### Filter by Country Stats
 
-````sh
+```sh
 curl https://corona-stats.online/<country>
-````
+```
 
-where <country> can be country name or its ISO code.
+where \<country\> can be a country name or its ISO code.
 
-- US: ```curl https://corona-stats.online/US```
-- Italy: ```curl https://corona-stats.online/Italy```
-- UK: ```curl https://corona-stats.online/UK``` or ```curl https://corona-stats.online/GB```
+* US: `curl https://corona-stats.online/US`
+* Italy: `curl https://corona-stats.online/Italy`
+* UK: `curl https://corona-stats.online/UK` or `curl https://corona-stats.online/GB`
 
+### Minimal Compact Table
+
+```sh
+curl https://corona-stats.online?minimal=true
+```
+
+### Only show top N countries
+
+```sh
+curl https://corona-stats.online?top=20
+```
+### Get realtime stats (NEW)
+
+```sh
+curl https://corona-stats.online?source=2
+```
+
+### Latest News (Work in Progress)
+
+```sh
+curl https://corona-stats.online/updates
+```
 
 ## API
 
-Add `?format=json` at the end of any API to get json formatted data.
+Add `?format=json` at the end of any API to get JSON formatted data.
 
-**Example:**
+### Example
 
-````sh
+```sh
 curl https://corona-stats.online?format=json
-````
+```
 
-## Local Command (For coloured ouput)
+## Local Command (For coloured output)
 
-We recommend NodeJS version 12 which you can download [here](https://nodejs.org/en/download/).
+Note: NodeJS version 12 recommended. You can download it [here](https://nodejs.org/en/download/).
 
 **Install**
 
-````sh
+``` sh
 npm install coronavirus-tracker-cli -g
-````
+```
 
-**Run command**
+### Run command
 
-````sh
+```sh
 corona
-````
+```
 
-**With emojis**
+### Filter by country
 
-````sh
-corona --emojis
-````
-
-**Filter by country**
-
-````sh
+```sh
 corona italy
-````
+```
 
-**Disable colors**
+### Get realtime stats (NEW)
 
-````sh
+```sh
+corona --source=2
+```
+
+### Top N countries
+
+```sh
+corona --top=10
+```
+
+### With emojis
+
+```sh
+corona --emojis
+```
+
+### Set Minimal Compact Table
+
+```sh
+corona --minimal
+```
+
+### Disable colors
+
+```sh
 corona --color=false
-````
+```
 
-**Top 10** (Working on native command)
-
-Note: This command will cause colored output to be discarded.
-
-````sh
-# Grep the rank of 10 and the 23 lines preceding it
-corona | grep -B 23 ' 10  '
-````
-
-### ToDos
+## ToDos
 
 * ~~Filter by country to get cases by local states.~~
 * ~~Move from npm to curl~~
@@ -88,41 +119,47 @@ corona | grep -B 23 ' 10  '
 * Add growth rate. (linear regression)
 * Add latest updates from reddit / twitter.
 
-### Contributors
+## Contributors
 
-```
+```text
  project  : curl-corona
- lines    :     2837
+ lines    :     3991
  authors  :
- 2479 Sagar Karira              87.4%
-  293 Alexandra Parker          10.3%
-   30 Lucas Fernandez Nicolau   1.1%
-   25 Shelton Koskie            0.9%
-    6 Mo'men Tawfik             0.2%
-    3 XhmikosR                  0.1%
-    1 CyberDracula              0.0%
+  3342 Sagar Karira             83.7%
+  356 XhmikosR                  8.9%
+  232 Alexandra Parker          5.8%
+   26 Lucas Fernandez Nicolau   0.7%
+   13 Daniel S                  0.3%
+   10 Shelton Koskie            0.3%
+    5 Sabu Siyad                0.1%
+    4 Mo'men Tawfik             0.1%
+    2 Steven                    0.1%
+    1 Greg Myers                0.0%
 ```
 
-### Other Regional Trackers.
+## Other Regional Trackers
 
-* [Italy](http://opendatadpc.maps.arcgis.com/apps/opsdashboard/index.html#/b0c68bce2cce478eaac82fe38d4138b1)
+* [Italy](https://opendatadpc.maps.arcgis.com/apps/opsdashboard/index.html#/b0c68bce2cce478eaac82fe38d4138b1)
 * [India](https://www.covid19india.org/)
 * [USA](https://www.npr.org/sections/health-shots/2020/03/16/816707182/map-tracking-the-spread-of-the-coronavirus-in-the-u-s)
 * [France](https://veille-coronavirus.fr/)
 * [Japan](https://covid19japan.com/)
+* [Philippines](https://ncovtracker.doh.gov.ph/)
 
-
-### Thanks to
+## Thanks to
 
 * [CSSEGISandData](https://github.com/CSSEGISandData/COVID-19) for the data.
-* [ExpDev07](https://github.com/ExpDev07/coronavirus-tracker-api) for the api.
+* [ExpDev07](https://github.com/ExpDev07/coronavirus-tracker-api) for the API.
 * [Zeit Now](https://github.com/zeit/now) for hosting.
+* [https://github.com/NovelCOVID/API/](https://github.com/NovelCOVID/API/) for realtime stats API.
 
-### Related Projects
+## Related Projects
 
-* https://github.com/NovelCOVID/API
-* https://github.com/javieraviles/covidAPI
-* https://github.com/mathdroid/covid-19-api
+* <https://github.com/NovelCOVID/API>
+* <https://github.com/javieraviles/covidAPI>
+* <https://github.com/mathdroid/covid-19-api>
+* <https://github.com/warengonzaga/covid19-tracker-cli>
+* <https://github.com/ahmadawais/corona-cli> 
 
 ## License
 

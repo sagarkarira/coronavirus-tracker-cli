@@ -1,15 +1,25 @@
 {
   "name": "coronavirus-tracker-cli",
-  "version": "0.4.0",
+  "version": "0.7.0",
   "description": "track conronavirus cases from cli",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sagarkarira/coronavirus-tracker-cli.git"
+  },
+  "keywords": [],
+  "bugs": {
+    "url": "https://github.com/sagarkarira/coronavirus-tracker-cli/issues"
+  },
+  "homepage": "https://github.com/sagarkarira/coronavirus-tracker-cli#readme",
   "main": "./lib/corona.js",
   "bin": {
-    "corona": "./bin/index.js"
+    "corona": "bin/index.js"
   },
   "scripts": {
-    "dev": "nodemon app.js",
+    "dev": "nodemon --inspect app.js",
+    "lint": "eslint .",
     "start": "node app.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "npm run lint"
   },
   "engines": {
     "node": ">=12.x"
@@ -17,7 +27,6 @@
   "author": "sagarkarira1992@gmail.com",
   "license": "ISC",
   "dependencies": {
-    "ansi-to-html": "^0.6.14",
     "axios": "^0.19.2",
     "chalk": "^3.0.0",
     "cli-table3": "^0.5.1",
@@ -29,10 +38,12 @@
     "moment": "^2.24.0",
     "morgan": "^1.9.1",
     "node-cache": "^5.1.0",
+    "strip-ansi": "^6.0.0",
     "yargonaut": "^1.1.4",
     "yargs": "15.3.1"
   },
   "devDependencies": {
+    "eslint": "^6.8.0",
     "nodemon": "^2.0.2"
   }
 }
