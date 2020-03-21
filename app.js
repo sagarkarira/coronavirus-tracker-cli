@@ -36,7 +36,7 @@ app.get('/', (req, res) => {
   const source = req.query.source ? Number(req.query.source) : 1;
 
   if (source === 2) {
-    return getWorldoMetersTable({ isCurl, emojis, minimal, top })
+    return getWorldoMetersTable({ isCurl, emojis, minimal, top, format})
       .then(result => {
         return res.send(result);
       }).catch(error => errorHandler(error, res));
@@ -107,7 +107,7 @@ app.get('/:country', (req, res) => {
   const { iso2 } = lookupObj;
 
   if (source === 2) {
-    return getWorldoMetersTable({ countryCode: iso2, isCurl, emojis, minimal })
+    return getWorldoMetersTable({ countryCode: iso2, isCurl, emojis, minimal, format })
       .then(result => {
         return res.send(result);
       }).catch(error => errorHandler(error, res));
