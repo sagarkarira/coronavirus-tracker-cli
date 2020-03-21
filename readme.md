@@ -4,7 +4,7 @@ Track The Corona virus from your CLI
 
 ## Screenshot
 
-<img src="./preview.png" alt="Preview" width="920">
+![Preview](./preview.png)
 
 ## CURL
 
@@ -26,19 +26,19 @@ where \<country\> can be a country name or its ISO code.
 * Italy: `curl https://corona-stats.online/Italy`
 * UK: `curl https://corona-stats.online/UK` or `curl https://corona-stats.online/GB`
 
-**Minimal Compact Table**
+### Minimal Compact Table
 
 ```sh
 curl https://corona-stats.online?minimal=true
 ```
 
-**Only show top N countries**
+### Only show top N countries
 
 ```sh
 curl https://corona-stats.online?top=20
 ```
 
-**Latest News (Work in Progress)**
+### Latest News (Work in Progress)
 
 ```sh
 curl https://corona-stats.online/updates
@@ -48,7 +48,7 @@ curl https://corona-stats.online/updates
 
 Add `?format=json` at the end of any API to get JSON formatted data.
 
-**Example:**
+### Example
 
 ```sh
 curl https://corona-stats.online?format=json
@@ -56,43 +56,43 @@ curl https://corona-stats.online?format=json
 
 ## Local Command (For coloured output)
 
-**Install**
+### Install
 
-```sh
+``` sh
 npm install coronavirus-tracker-cli -g
 ```
 
-**Run command**
+### Run command
 
 ```sh
 corona
 ```
 
-**Filter by country**
+### Filter by country
 
 ```sh
 corona italy
 ```
 
-**Top N countries**
+### Top N countries
 
 ```sh
 corona --top=10
 ```
 
-**With emojis**
+### With emojis
 
 ```sh
 corona --emojis
 ```
 
-**Minimal Compact Table**
+### Set Minimal Compact Table
 
 ```sh
 corona --minimal
 ```
 
-**Disable colors**
+### Disable colors
 
 ```sh
 corona --color=false
@@ -108,7 +108,7 @@ corona --color=false
 
 ## Contributors
 
-```
+```text
  project  : curl-corona
  lines    :     3991
  authors  :
@@ -124,13 +124,14 @@ corona --color=false
     1 Greg Myers                0.0%
 ```
 
-## Other Regional Trackers.
+## Other Regional Trackers
 
 * [Italy](https://opendatadpc.maps.arcgis.com/apps/opsdashboard/index.html#/b0c68bce2cce478eaac82fe38d4138b1)
 * [India](https://www.covid19india.org/)
 * [USA](https://www.npr.org/sections/health-shots/2020/03/16/816707182/map-tracking-the-spread-of-the-coronavirus-in-the-u-s)
 * [France](https://veille-coronavirus.fr/)
 * [Japan](https://covid19japan.com/)
+* [Philippines](https://ncovtracker.doh.gov.ph/)
 
 ## Thanks to
 
@@ -143,6 +144,8 @@ corona --color=false
 * <https://github.com/NovelCOVID/API>
 * <https://github.com/javieraviles/covidAPI>
 * <https://github.com/mathdroid/covid-19-api>
+* <https://github.com/warengonzaga/covid19-tracker-cli>
+* <https://github.com/ahmadawais/corona-cli>
 
 ## License
 
