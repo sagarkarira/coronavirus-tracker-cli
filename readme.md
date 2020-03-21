@@ -37,6 +37,11 @@ curl https://corona-stats.online?minimal=true
 ```sh
 curl https://corona-stats.online?top=20
 ```
+### Get realtime stats (NEW)
+
+```sh
+curl https://corona-stats.online?source=2
+```
 
 ### Latest News (Work in Progress)
 
@@ -72,6 +77,12 @@ corona
 
 ```sh
 corona italy
+```
+
+### Get realtime stats (NEW)
+
+```sh
+corona --source=2
 ```
 
 ### Top N countries
@@ -138,6 +149,7 @@ corona --color=false
 * [CSSEGISandData](https://github.com/CSSEGISandData/COVID-19) for the data.
 * [ExpDev07](https://github.com/ExpDev07/coronavirus-tracker-api) for the API.
 * [Zeit Now](https://github.com/zeit/now) for hosting.
+* [https://github.com/NovelCOVID/API/](https://github.com/NovelCOVID/API/) for realtime stats API.
 
 ## Related Projects
 
@@ -145,7 +157,7 @@ corona --color=false
 * <https://github.com/javieraviles/covidAPI>
 * <https://github.com/mathdroid/covid-19-api>
 * <https://github.com/warengonzaga/covid19-tracker-cli>
-* <https://github.com/ahmadawais/corona-cli>
+* <https://github.com/ahmadawais/corona-cli> 
 
 ## License
 
