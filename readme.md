@@ -158,7 +158,7 @@ corona --color=false
 * <https://github.com/javieraviles/covidAPI>
 * <https://github.com/mathdroid/covid-19-api>
 * <https://github.com/warengonzaga/covid19-tracker-cli>
-* <https://github.com/ahmadawais/corona-cli> 
+* <https://github.com/ahmadawais/corona-cli>
 
 ## Hosting
 
@@ -167,4 +167,3 @@ corona --color=false
 ## License
 
 [WTFPL](http://www.wtfpl.net/)
-
