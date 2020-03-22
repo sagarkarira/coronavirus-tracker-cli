@@ -1,6 +1,6 @@
 {
   "name": "coronavirus-tracker-cli",
-  "version": "0.7.0",
+  "version": "0.8.0",
   "description": "track conronavirus cases from cli",
   "repository": {
     "type": "git",

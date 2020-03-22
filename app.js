@@ -75,10 +75,14 @@ app.get('/updates', (req, res) => {
   }).catch(error => errorHandler(error, res));
 });
 
-app.get('/:country/graph', (req, res) => {
+app.get(['/:country/graph', '/graph'], (req, res) => {
   const { country } = req.params;
   const isCurl = IS_CURL_RE.test(req.headers['user-agent']);
-  console.log(country);
+  if (!country) {
+    return getGraph({ isCurl })
+      .then(result => res.send(result))
+      .catch(error => errorHandler(error, res));
+  }
   const lookupObj = lookupCountry(country);
 
   if (!lookupObj) {

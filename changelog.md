@@ -1,5 +1,9 @@
 # Changelog
 
+## Version 0.8.0
+
+* Added confirmed cases graphs ``corona -g`` or ``corona italy -g`
+
 ## Version 0.7.0
 
 * Added new source to fetch realtime data. ``corona --source=2``
