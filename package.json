@@ -21,6 +21,10 @@
     "start": "node app.js",
     "test": "npm run lint"
   },
+  "files": [
+    "{bin,lib}/*.js",
+    "app.js"
+  ],
   "engines": {
     "node": ">=12.x"
   },
