@@ -1,11 +1,17 @@
 const express = require('express');
 const morgan = require('morgan');
+const chalk = require('chalk');
 
-const { getCountryTable, getJSONData, getJSONDataForCountry } = require('./lib/byCountry');
-const { getCompleteTable } = require('./lib/corona');
-const { lookupCountry } = require('./lib/helpers');
+const {
+  getCountryTable,
+  getJSONData,
+  getJSONDataForCountry,
+} = require('./lib/byCountry');
+const { getCompleteTable, getGraph } = require('./lib/corona');
+const { lookupCountry, htmlTemplate } = require('./lib/helpers');
 const { getLiveUpdates } = require('./lib/reddit.js');
 const { getWorldoMetersTable } = require('./lib/worldoMeters.js');
+const { helpContent } = require('./lib/constants');
 
 const app = express();
 const port = process.env.PORT || 3001;
@@ -68,6 +74,40 @@ app.get('/updates', (req, res) => {
     return res.send(result);
   }).catch(error => errorHandler(error, res));
 });
+
+app.get(['/:country/graph', '/graph'], (req, res) => {
+  const { country } = req.params;
+  const isCurl = IS_CURL_RE.test(req.headers['user-agent']);
+  if (!country) {
+    return getGraph({ isCurl })
+      .then(result => res.send(result))
+      .catch(error => errorHandler(error, res));
+  }
+  const lookupObj = lookupCountry(country);
+
+  if (!lookupObj) {
+    return res.send(`
+    Country not found.
+    Try the full country name or country code.
+    Example:
+      - /UK: for United Kingdom
+      - /US: for United States of America.
+      - /Italy: for Italy.
+    `);
+  }
+  return getGraph({countryCode: lookupObj.iso2, isCurl })
+    .then(result => res.send(result))
+    .catch(error => errorHandler(error, res));
+});
+
+app.get('/help', (req, res) => {
+  const isCurl = IS_CURL_RE.test(req.headers['user-agent']);
+  if (!isCurl) {
+    return res.send(htmlTemplate(helpContent));
+  }
+  return res.send(chalk.green(helpContent));
+});
+
 
 app.get('/:country', (req, res) => {
   const { country } = req.params;

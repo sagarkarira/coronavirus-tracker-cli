@@ -1,6 +1,6 @@
 {
   "name": "coronavirus-tracker-cli",
-  "version": "0.7.0",
+  "version": "0.8.0",
   "description": "track conronavirus cases from cli",
   "repository": {
     "type": "git",
@@ -21,12 +21,17 @@
     "start": "node app.js",
     "test": "npm run lint"
   },
+  "files": [
+    "{bin,lib}/*.js",
+    "app.js"
+  ],
   "engines": {
     "node": ">=12.x"
   },
   "author": "sagarkarira1992@gmail.com",
   "license": "ISC",
   "dependencies": {
+    "asciichart": "^1.5.11",
     "axios": "^0.19.2",
     "chalk": "^3.0.0",
     "cli-table3": "^0.5.1",

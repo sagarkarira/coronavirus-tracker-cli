@@ -3,7 +3,7 @@
 require('yargonaut').style('green');
 const yargs = require('yargs');
 const chalk = require('chalk');
-const { getCompleteTable } = require('../lib/corona');
+const { getCompleteTable, getGraph } = require('../lib/corona');
 const { getCountryTable } = require('../lib/byCountry');
 const { getWorldoMetersTable } = require('../lib/worldoMeters');
 const { lookupCountry } = require('../lib/helpers');
@@ -62,6 +62,12 @@ const { argv } = yargs
       alias: 'top',
       describe: 'Filter table by rank',
       type: 'int'
+    },
+    g: {
+      alias: 'graph',
+      describe: 'Get graph',
+      type: 'boolean',
+      default: false,
     }
   })
   .strict()
@@ -69,15 +75,14 @@ const { argv } = yargs
 
 argv.countryCode = argv.country;
 if (argv.source === 2) {
-  getWorldoMetersTable(argv)
-    .then(console.log)
-    .catch(console.error);
+  getWorldoMetersTable(argv).then(console.log).catch(console.error);
+}
+else if (argv.graph === true) {
+  getGraph(argv.countryCode).then(console.log).catch(console.error);
 } else {
   (
     argv.country === 'ALL'
       ? getCompleteTable(argv)
       : getCountryTable(argv)
-  )
-    .then(console.log)
-    .catch(console.error);
+  ).then(console.log).catch(console.error);
 }
