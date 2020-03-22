@@ -146,12 +146,11 @@ corona --color=false
 * [Japan](https://covid19japan.com/)
 * [Philippines](https://ncovtracker.doh.gov.ph/)
 
-## Thanks to
+## Data Sources
 
-* [CSSEGISandData](https://github.com/CSSEGISandData/COVID-19) for the data.
-* [ExpDev07](https://github.com/ExpDev07/coronavirus-tracker-api) for the API.
-* [Zeit Now](https://github.com/zeit/now) for hosting.
-* [https://github.com/NovelCOVID/API/](https://github.com/NovelCOVID/API/) for realtime stats API.
+* [John Hopkins Data](https://github.com/CSSEGISandData/COVID-19) updated once a day at 11:59 UTC
+* [John Hopkins Data API](https://github.com/ExpDev07/coronavirus-tracker-api)
+* [WorldoMeters Data API](https://github.com/NovelCOVID/API/) updated very frequently.
 
 ## Related Projects
 
@@ -161,6 +160,11 @@ corona --color=false
 * <https://github.com/warengonzaga/covid19-tracker-cli>
 * <https://github.com/ahmadawais/corona-cli> 
 
+## Hosting
+
+* Big shoutout to [Zeit Now](https://github.com/zeit/now).
+
 ## License
 
 [WTFPL](http://www.wtfpl.net/)
+

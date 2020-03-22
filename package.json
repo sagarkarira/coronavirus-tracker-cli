@@ -27,6 +27,7 @@
   "author": "sagarkarira1992@gmail.com",
   "license": "ISC",
   "dependencies": {
+    "asciichart": "^1.5.11",
     "axios": "^0.19.2",
     "chalk": "^3.0.0",
     "cli-table3": "^0.5.1",
