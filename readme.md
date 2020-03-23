@@ -145,6 +145,7 @@ corona --color=false
 * [France](https://veille-coronavirus.fr/)
 * [Japan](https://covid19japan.com/)
 * [Philippines](https://ncovtracker.doh.gov.ph/)
+* [Austria (official)](https://info.gesundheitsministerium.at), [Austria (inofficial but more detailed)](https://covid19.spiessknafl.at)
 
 ## Data Sources
 
