@@ -160,6 +160,7 @@ corona --color=false
 * <https://github.com/mathdroid/covid-19-api>
 * <https://github.com/warengonzaga/covid19-tracker-cli>
 * <https://github.com/ahmadawais/corona-cli>
+* <https://github.com/ebwinters/CoronaTracker>
 
 ## Hosting
 
