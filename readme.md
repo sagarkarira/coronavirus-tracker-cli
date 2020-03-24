@@ -1,59 +1,66 @@
-# coronavirus-tracker-cli [![Build Status](https://github.com/sagarkarira/coronavirus-tracker-cli/workflows/Tests/badge.svg)](https://github.com/sagarkarira/coronavirus-tracker-cli/actions?workflow=Tests)
+<h1 align="center">
+    Coronavirus Tracker CLI
+</h1>
 
-Track The Corona virus from your CLI
+Track The Corona virus stats from your terminal using curl or global command.
+
+[![Build Status](https://github.com/sagarkarira/coronavirus-tracker-cli/workflows/Tests/badge.svg)](https://github.com/sagarkarira/coronavirus-tracker-cli/actions?workflow=Tests)
+[![Tweet](https://img.shields.io/twitter/url?style=social&url=https%3A%2F%2Fgithub.com%2Fsagarkarira%2Fcoronavirus-tracker-cli%2F)](https://img.shields.io/twitter/url?style=social&url=https%3A%2F%2Fgithub.com%2Fsagarkarira%2Fcoronavirus-tracker-cli%2F)
+
+
+**Live global stats (provided by [fight-covid19/bagdes](https://github.com/fight-covid19/bagdes)) from this API:**
+
+![Covid-19 Confirmed](https://covid19-badges.herokuapp.com/confirmed/latest)
+![Covid-19 Deaths](https://covid19-badges.herokuapp.com/deaths/latest)
 
 ## Screenshot
 
 ![Preview](./preview.png)
 
+## Data Sources
+
+* Source 1 : [John Hopkins Data API](https://github.com/ExpDev07/coronavirus-tracker-api)
+* Source 2 : [WorldoMeters Data API](https://github.com/NovelCOVID/API/) updated very frequently.
+
+**Note: Source 2 is the default source now if not mentioned**
+
 ## CURL
 
-### Complete Data
-
 ```sh
+# Get data from worldometers api i.e source 2
 curl https://corona-stats.online
-```
 
-### Filter by Country Stats
-
-```sh
-curl https://corona-stats.online/<country>
-```
-
-where \<country\> can be a country name or its ISO code.
-
-* US: `curl https://corona-stats.online/US`
-* Italy: `curl https://corona-stats.online/Italy`
-* UK: `curl https://corona-stats.online/UK` or `curl https://corona-stats.online/GB`
-
-### Minimal Compact Table
-
-```sh
-curl https://corona-stats.online?minimal=true
-```
-
-### Only show top N countries
-
-```sh
-curl https://corona-stats.online?top=20
-```
-### Get JHU data (source 2 is now the default source)
-
-```sh
+# Get data from source 1
 curl https://corona-stats.online?source=1
-```
 
-### Latest News (Work in Progress)
+# Get data from source 2
+curl https://corona-stats.online?source=2
 
-```sh
+# Filter by country /countryCode or /countryName
+
+curl https://corona-stats.online/US 
+curl https://corona-stats.online/italy
+curl https://corona-stats.online/uk?source=2
+curl https://corona-stats.online/gb?source=1
+
+# Only show top N countries
+curl https://corona-stats.online?top=20
+
+# Remove padding and borders from table
+curl https://corona-stats.online?minimal=true
+
+
+# Latest News (Work In Progress)
 curl https://corona-stats.online/updates
+
+# Help
+curl https://corona-stats.online/help
+
 ```
 
 ## API
 
 Add `?format=json` at the end of any API to get JSON formatted data.
-
-### Example
 
 ```sh
 curl https://corona-stats.online?format=json
@@ -66,49 +73,30 @@ Note: NodeJS version 12 recommended. You can download it [here](https://nodejs.o
 **Install**
 
 ``` sh
+# Install
 npm install coronavirus-tracker-cli -g
-```
 
-### Run command
+# Run command
+corona 
 
-```sh
-corona
-```
-
-### Filter by country
-
-```sh
-corona italy
-```
-
-### Get JHU data (source 2 is now the default source)
-
-```sh
+# Get source 1 data
 corona --source=1
-```
 
-### Top N countries
+# Filter by country
+corona italy
 
-```sh
+# Filter top N countries
 corona --top=10
-```
 
-### With emojis
-
-```sh
-corona --emojis
-```
-
-### Set Minimal Compact Table
-
-```sh
+# Minimal Compact Table
 corona --minimal
-```
 
-### Disable colors
-
-```sh
+# Monocolor / No colors
 corona --color=false
+
+# Show emojis
+corona --emojis
+
 ```
 
 ## ToDos
@@ -116,8 +104,10 @@ corona --color=false
 * ~~Filter by country to get cases by local states.~~
 * ~~Move from npm to curl~~
 * ~~Add daily change.~~
-* Add growth rate. (linear regression)
+* ~~Add graphs~~
+* Add growth rate column ? (double in X days)
 * Add latest updates from reddit / twitter.
+* Find and add regional data - state, county, city, district level data.
 
 ## Contributors
 
@@ -146,12 +136,6 @@ corona --color=false
 * [Japan](https://covid19japan.com/)
 * [Philippines](https://ncovtracker.doh.gov.ph/)
 * [Austria (official)](https://info.gesundheitsministerium.at), [Austria (inofficial but more detailed)](https://covid19.spiessknafl.at)
-
-## Data Sources
-
-* [John Hopkins Data](https://github.com/CSSEGISandData/COVID-19) updated once a day at 11:59 UTC
-* [John Hopkins Data API](https://github.com/ExpDev07/coronavirus-tracker-api)
-* [WorldoMeters Data API](https://github.com/NovelCOVID/API/) updated very frequently.
 
 ## Related Projects
 
