@@ -12,7 +12,7 @@ const { getCompleteTable, getGraph } = require('./lib/corona');
 const { lookupCountry, htmlTemplate } = require('./lib/helpers');
 const { getLiveUpdates } = require('./lib/reddit.js');
 const { getWorldoMetersTable } = require('./lib/worldoMeters.js');
-const { helpContent } = require('./lib/constants');
+const { helpContent, countryNotFound } = require('./lib/constants');
 
 const app = express();
 const port = process.env.PORT || 3001;
@@ -20,10 +20,10 @@ const IS_CURL_RE = /\bcurl\b/im;
 
 function errorHandler(error, res) {
   console.error(error);
-  return res.send(`
+  return res.status(500).send(htmlTemplate(`
     I am sorry. Something went wrong. Please report it\n
     ${error.message}
-  `);
+  `));
 }
 
 app.set('json escape', true);
@@ -56,7 +56,7 @@ app.get('/', (req, res) => {
   const minimal = req.query.minimal === 'true';
   const emojis = req.query.emojis === 'true';
   const top = req.query.top ? Number(req.query.top) : 1000;
-  const source = req.query.source ? Number(req.query.source) : 2;
+  const source = req.query.source ? Number(req.query.source) : 1;
 
   if (source === 2) {
     return getWorldoMetersTable({ isCurl, emojis, minimal, top, format})
@@ -103,14 +103,7 @@ app.get(['/:country/graph', '/graph'], (req, res) => {
   const lookupObj = lookupCountry(country);
 
   if (!lookupObj) {
-    return res.send(`
-    Country not found.
-    Try the full country name or country code.
-    Example:
-      - /UK: for United Kingdom
-      - /US: for United States of America.
-      - /Italy: for Italy.
-    `);
+    return res.status(404).send(countryNotFound(isCurl));
   }
   return getGraph({countryCode: lookupObj.iso2, isCurl })
     .then(result => res.send(result))
@@ -132,7 +125,7 @@ app.get('/:country', (req, res) => {
   const format = req.query.format ? req.query.format : '';
   const minimal = req.query.minimal === 'true';
   const emojis = req.query.emojis === 'true';
-  const source = req.query.source ? Number(req.query.source) : 2;
+  const source = req.query.source ? Number(req.query.source) : 1;
 
   if (!country || country.toUpperCase() === 'ALL') {
     if (format.toLowerCase() === 'json') {
@@ -150,14 +143,7 @@ app.get('/:country', (req, res) => {
   const lookupObj = lookupCountry(country);
 
   if (!lookupObj) {
-    return res.send(`
-    Country not found.
-    Try the full country name or country code.
-    Example:
-      - /UK: for United Kingdom
-      - /US: for United States of America.
-      - /Italy: for Italy.
-    `);
+    return res.status(404).send(countryNotFound(isCurl));
   }
 
 
