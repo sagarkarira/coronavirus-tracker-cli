@@ -56,7 +56,7 @@ app.get('/', (req, res) => {
   const minimal = req.query.minimal === 'true';
   const emojis = req.query.emojis === 'true';
   const top = req.query.top ? Number(req.query.top) : 1000;
-  const source = req.query.source ? Number(req.query.source) : 1;
+  const source = req.query.source ? Number(req.query.source) : 2;
 
   if (source === 2) {
     return getWorldoMetersTable({ isCurl, emojis, minimal, top, format})
@@ -132,7 +132,7 @@ app.get('/:country', (req, res) => {
   const format = req.query.format ? req.query.format : '';
   const minimal = req.query.minimal === 'true';
   const emojis = req.query.emojis === 'true';
-  const source = req.query.source ? Number(req.query.source) : 1;
+  const source = req.query.source ? Number(req.query.source) : 2;
 
   if (!country || country.toUpperCase() === 'ALL') {
     if (format.toLowerCase() === 'json') {
