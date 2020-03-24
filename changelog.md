@@ -1,5 +1,9 @@
 # Changelog
 
+## Version 0.9.0
+
+* Changed default source to worldoMeters. i.e source 2 is now default
+
 ## Version 0.8.0
 
 * Added confirmed cases graphs `corona -g` or `corona italy -g`
