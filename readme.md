@@ -37,10 +37,10 @@ curl https://corona-stats.online?minimal=true
 ```sh
 curl https://corona-stats.online?top=20
 ```
-### Get realtime stats (NEW)
+### Get JHU data (source 2 is now the default source)
 
 ```sh
-curl https://corona-stats.online?source=2
+curl https://corona-stats.online?source=1
 ```
 
 ### Latest News (Work in Progress)
@@ -81,10 +81,10 @@ corona
 corona italy
 ```
 
-### Get realtime stats (NEW)
+### Get JHU data (source 2 is now the default source)
 
 ```sh
-corona --source=2
+corona --source=1
 ```
 
 ### Top N countries

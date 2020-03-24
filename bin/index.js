@@ -38,7 +38,7 @@ const { argv } = yargs
     s: {
       alias: 'source',
       describe: 'fetch data from other source',
-      default: 1,
+      default: 2,
       type: 'int'
     },
     e: {
@@ -74,15 +74,15 @@ const { argv } = yargs
   .help('help');
 
 argv.countryCode = argv.country;
-if (argv.source === 2) {
-  getWorldoMetersTable(argv).then(console.log).catch(console.error);
-}
-else if (argv.graph === true) {
-  getGraph(argv.countryCode).then(console.log).catch(console.error);
-} else {
+if (argv.source === 1) {
   (
     argv.country === 'ALL'
       ? getCompleteTable(argv)
       : getCountryTable(argv)
   ).then(console.log).catch(console.error);
+}
+else if (argv.graph === true) {
+  getGraph(argv.countryCode).then(console.log).catch(console.error);
+} else {
+  getWorldoMetersTable(argv).then(console.log).catch(console.error);
 }
