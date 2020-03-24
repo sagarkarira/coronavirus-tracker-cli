@@ -49,12 +49,17 @@ curl https://corona-stats.online?top=20
 # Remove padding and borders from table
 curl https://corona-stats.online?minimal=true
 
-
 # Latest News (Work In Progress)
 curl https://corona-stats.online/updates
 
+# Allow emojis (emojis breaks in some terminals)
+curl https://corona-stats.online?emojis=true
+
 # Help
 curl https://corona-stats.online/help
+
+# Mix up above params (One that I use)
+curl 'https://corona-stats.online?top=30&source=2&minimal=true&emojis=true'
 
 ```
 
@@ -66,7 +71,7 @@ Add `?format=json` at the end of any API to get JSON formatted data.
 curl https://corona-stats.online?format=json
 ```
 
-## Local Command (For coloured output)
+## Node CLI
 
 Note: NodeJS version 12 recommended. You can download it [here](https://nodejs.org/en/download/).
 
@@ -81,22 +86,30 @@ corona
 
 # Get source 1 data
 corona --source=1
+corona -s=1
 
 # Filter by country
 corona italy
 
 # Filter top N countries
 corona --top=10
+corona -t=10
 
 # Minimal Compact Table
 corona --minimal
+corona -m
 
 # Monocolor / No colors
 corona --color=false
+corona -c=false
 
 # Show emojis
 corona --emojis
+corona -e
 
+# Confirmed Cases Graph
+corona italy --graph
+corona italy -g
 ```
 
 ## ToDos
