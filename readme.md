@@ -8,7 +8,7 @@ Track The Corona virus stats from your terminal using curl or global command.
 [![Tweet](https://img.shields.io/twitter/url?style=social&url=https%3A%2F%2Fgithub.com%2Fsagarkarira%2Fcoronavirus-tracker-cli%2F)](https://img.shields.io/twitter/url?style=social&url=https%3A%2F%2Fgithub.com%2Fsagarkarira%2Fcoronavirus-tracker-cli%2F)
 
 
-**Live global stats (provided by [fight-covid19/bagdes](https://github.com/fight-covid19/bagdes))
+**Live global stats (provided by [fight-covid19/bagdes](https://github.com/fight-covid19/bagdes))**
 
 ![Covid-19 Confirmed](https://covid19-badges.herokuapp.com/confirmed/latest)
 ![Covid-19 Deaths](https://covid19-badges.herokuapp.com/deaths/latest)
