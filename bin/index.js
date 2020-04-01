@@ -80,14 +80,27 @@ const { argv } = yargs
   .help('help');
 
 argv.countryCode = argv.country;
-if (argv.states === 'US') {
-  getUsaStats(argv).then(result => {
-    console.log(result);
-    process.exit(1);
-  }).catch(error => {
-    console.error(error);
-    process.exit(0);
-  });
+if (argv.states) {
+  const country = lookupCountry(argv.states);
+  if (!country) {
+    let error = `Country '${argv.states}' not found.\n`;
+    error += 'Try full country name or country code.\n';
+    error += 'Ex:\n';
+    error += '- UK: for United Kingdom \n';
+    error += '- US: for United States of America.\n';
+    error += '- Italy: for Italy.\n';
+    throw new Error(chalk.red.bold(error));
+  }
+  argv.countryCode = country.iso2;
+  if (argv.countryCode === 'US') {
+    getUsaStats(argv).then(result => {
+      console.log(result);
+      process.exit(1);
+    }).catch(error => {
+      console.error(error);
+      process.exit(0);
+    });
+  }
 }
 
 if (argv.source === 1) {
@@ -98,7 +111,7 @@ if (argv.source === 1) {
   ).then(console.log).catch(console.error);
 }
 else if (argv.graph === true) {
-  getGraph(argv.countryCode).then(console.log).catch(console.error);
+  getGraph(argv).then(console.log).catch(console.error);
 } else {
   getWorldoMetersTable(argv).then(console.log).catch(console.error);
 }
