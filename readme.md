@@ -38,10 +38,14 @@ curl https://corona-stats.online?source=2
 
 # Filter by country /countryCode or /countryName
 
-curl https://corona-stats.online/US 
+curl https://corona-stats.online/US
 curl https://corona-stats.online/italy
 curl https://corona-stats.online/uk?source=2
 curl https://corona-stats.online/gb?source=1
+
+# State wise stats of country (Only for US as of now)
+
+curl https://corona-stats.online/US
 
 # Only show top N countries
 curl https://corona-stats.online?top=20
@@ -90,6 +94,10 @@ corona -s=1
 
 # Filter by country
 corona italy
+
+# state wise stats (only for US as of now)
+corona --states=US
+corona --st=us
 
 # Filter top N countries
 corona --top=10

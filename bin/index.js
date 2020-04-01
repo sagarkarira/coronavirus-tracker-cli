@@ -7,6 +7,7 @@ const { getCompleteTable, getGraph } = require('../lib/corona');
 const { getCountryTable } = require('../lib/byCountry');
 const { getWorldoMetersTable } = require('../lib/worldoMeters');
 const { lookupCountry } = require('../lib/helpers');
+const { getUsaStats } = require('../lib/country/us');
 
 const { argv } = yargs
   .command('$0 [country]', 'Tool to track COVID-19 statistics from terminal', yargs =>
@@ -68,12 +69,27 @@ const { argv } = yargs
       describe: 'Get graph',
       type: 'boolean',
       default: false,
+    },
+    st: {
+      alias: 'states',
+      describe: 'Get state level data of country ',
+      type: 'string',
     }
   })
   .strict()
   .help('help');
 
 argv.countryCode = argv.country;
+if (argv.states === 'US') {
+  getUsaStats(argv).then(result => {
+    console.log(result);
+    process.exit(1);
+  }).catch(error => {
+    console.error(error);
+    process.exit(0);
+  });
+}
+
 if (argv.source === 1) {
   (
     argv.country === 'ALL'

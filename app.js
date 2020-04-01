@@ -12,7 +12,8 @@ const { getCompleteTable, getGraph } = require('./lib/corona');
 const { lookupCountry, htmlTemplate, footer } = require('./lib/helpers');
 const { getLiveUpdates } = require('./lib/reddit.js');
 const { getWorldoMetersTable } = require('./lib/worldoMeters.js');
-const { helpContent, countryNotFound } = require('./lib/constants');
+const { getUsaStats } = require('./lib/country/us.js');
+const { helpContent, countryNotFound, stateCountryNotFound } = require('./lib/constants');
 
 const app = express();
 const port = process.env.PORT || 3001;
@@ -123,6 +124,26 @@ app.get('/help', (req, res) => {
     return res.send(htmlTemplate(helpContent));
   }
   return res.send(chalk.green(helpContent));
+});
+
+app.get('/states/:country', (req, res) => {
+  const { country } = req.params;
+  const isCurl = req.isCurl;
+  const format = req.query.format ? req.query.format : '';
+  const minimal = req.query.minimal === 'true';
+  const top = req.query.top ? Number(req.query.top) : 1000;
+
+  const lookupObj = lookupCountry(country);
+
+  if (!lookupObj) {
+    return res.status(404).send(stateCountryNotFound(isCurl));
+  }
+  if (lookupObj.iso2 === 'US') {
+    return getUsaStats({ isCurl, minimal, top, format})
+      .then(result => {
+        return res.send(result);
+      }).catch(error => errorHandler(error, req, res));
+  }
 });
 
 
