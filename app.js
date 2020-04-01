@@ -13,7 +13,7 @@ const { lookupCountry, htmlTemplate, footer } = require('./lib/helpers');
 const { getLiveUpdates } = require('./lib/reddit.js');
 const { getWorldoMetersTable } = require('./lib/worldoMeters.js');
 const { getUsaStats } = require('./lib/country/us.js');
-const { helpContent, countryNotFound } = require('./lib/constants');
+const { helpContent, countryNotFound, stateCountryNotFound } = require('./lib/constants');
 
 const app = express();
 const port = process.env.PORT || 3001;
@@ -136,7 +136,7 @@ app.get('/states/:country', (req, res) => {
   const lookupObj = lookupCountry(country);
 
   if (!lookupObj) {
-    return res.status(404).send(countryNotFound(isCurl));
+    return res.status(404).send(stateCountryNotFound(isCurl));
   }
   if (lookupObj.iso2 === 'US') {
     return getUsaStats({ isCurl, minimal, top, format})
