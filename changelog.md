@@ -1,5 +1,9 @@
 # Changelog
 
+## Version 0.9.1
+
+* Added US states api `corona --states=US`
+
 ## Version 0.9.0
 
 * Changed default source to worldoMeters. i.e source 2 is now default
