@@ -67,7 +67,7 @@ app.get('/', (req, res) => {
   if (source === 1) {
     if (format.toLowerCase() === 'json') {
       return getJSONData().then(result => {
-        return res.json(result);
+        return res.json({ ...result, lastUpdated: new Date() });
       }).catch(error => errorHandler(error, req, res));
     }
 
