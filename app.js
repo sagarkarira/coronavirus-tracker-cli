@@ -51,6 +51,8 @@ app.use(helmet.hsts({
 app.use(helmet.referrerPolicy({ policy: 'strict-origin-when-cross-origin' }));
 
 app.use(morgan(':remote-addr :remote-user :method :url :status :res[content-length] - :response-time ms'));
+app.use('/favicon.ico', express.static('./favicon.ico'));
+
 app.use((req, res, next) => {
   res.setHeader('Cache-Control', 'no-cache');
   req.isCurl = IS_CURL_RE.test(req.headers['user-agent']);

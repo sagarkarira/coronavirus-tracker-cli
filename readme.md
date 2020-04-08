@@ -2,11 +2,13 @@
     Coronavirus Tracker CLI
 </h1>
 
+
 Track The Corona virus stats from your terminal using curl or global command.
 
 [![Build Status](https://github.com/sagarkarira/coronavirus-tracker-cli/workflows/Tests/badge.svg)](https://github.com/sagarkarira/coronavirus-tracker-cli/actions?workflow=Tests)
 [![Tweet](https://img.shields.io/twitter/url?style=social&url=https%3A%2F%2Fgithub.com%2Fsagarkarira%2Fcoronavirus-tracker-cli%2F)](https://img.shields.io/twitter/url?style=social&url=https%3A%2F%2Fgithub.com%2Fsagarkarira%2Fcoronavirus-tracker-cli%2F)
 
+![Sponsored By Zeit](./powered-by.svg)
 
 **Live global stats (provided by [fight-covid19/bagdes](https://github.com/fight-covid19/bagdes))**
 
@@ -167,9 +169,9 @@ corona italy -g
 * <https://github.com/ahmadawais/corona-cli>
 * <https://github.com/ebwinters/CoronaTracker>
 
-## Hosting
+## Sponsored By
 
-* Big shoutout to [Zeit Now](https://github.com/zeit/now).
+* [Zeit Now](https://github.com/zeit/now).
 
 ## License
 
