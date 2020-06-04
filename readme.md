@@ -21,7 +21,7 @@ Track The Corona virus stats from your terminal using curl or global command.
 
 ## Data Sources
 
-* Source 1 : [John Hopkins Data API](https://github.com/ExpDev07/coronavirus-tracker-api)
+* Source 1 : [Johns Hopkins Data API](https://github.com/ExpDev07/coronavirus-tracker-api)
 * Source 2 : [WorldoMeters Data API](https://github.com/NovelCOVID/API/) updated very frequently.
 
 **Note: Source 2 is the default source now if not mentioned**
