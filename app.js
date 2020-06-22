@@ -157,14 +157,14 @@ app.get('/:country', (req, res) => {
   const emojis = req.query.emojis === 'true';
   const source = req.query.source ? Number(req.query.source) : 2;
 
-  if (!country || country.toUpperCase() === 'ALL') {
+  if (!country || country.toUpperCase() === 'ALL' || country.includes(',')) {
     if (format.toLowerCase() === 'json') {
-      return getWorldoMetersTable({ isCurl, emojis, minimal, format }).then(result => {
+      return getWorldoMetersTable({ countryCode: country, isCurl, emojis, minimal, format }).then(result => {
         return res.json(result);
       }).catch(error => errorHandler(error, req, res));
     }
 
-    return getWorldoMetersTable({ isCurl, emojis, minimal })
+    return getWorldoMetersTable({ countryCode: country, isCurl, emojis, minimal })
       .then(result => {
         return res.send(result);
       }).catch(error => errorHandler(error, req, res));
