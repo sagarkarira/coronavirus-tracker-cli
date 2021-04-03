@@ -165,7 +165,7 @@ corona italy -g
 * <https://github.com/NovelCOVID/API>
 * <https://github.com/javieraviles/covidAPI>
 * <https://github.com/mathdroid/covid-19-api>
-* <https://github.com/warengonzaga/covid19-tracker-cli>
+* <https://github.com/wareneutron/covid19-tracker-cli>
 * <https://github.com/ahmadawais/corona-cli>
 * <https://github.com/ebwinters/CoronaTracker>
 
