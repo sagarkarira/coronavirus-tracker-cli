@@ -13,7 +13,11 @@ const { lookupCountry, htmlTemplate, footer } = require('./lib/helpers');
 const { getLiveUpdates } = require('./lib/reddit.js');
 const { getWorldoMetersTable } = require('./lib/worldoMeters.js');
 const { getUsaStats } = require('./lib/country/us.js');
-const { helpContent, countryNotFound, stateCountryNotFound } = require('./lib/constants');
+const {
+  helpContent,
+  countryNotFound,
+  stateCountryNotFound,
+} = require('./lib/constants');
 
 const app = express();
 const port = process.env.PORT || 3001;
@@ -24,7 +28,7 @@ function errorHandler(error, req, res) {
   const body = `
     I am sorry. Something went wrong. Please report it\n
     ${error.message}
-    ${footer(new Date)}
+    ${footer(new Date())}
   `;
   if (req.isCurl) {
     return body;
@@ -34,27 +38,35 @@ function errorHandler(error, req, res) {
 
 app.set('json escape', true);
 
-app.use(helmet({
-  dnsPrefetchControl: false,
-  frameguard: {
-    action: 'deny'
-  }
-}));
+app.use(
+  helmet({
+    dnsPrefetchControl: false,
+    frameguard: {
+      action: 'deny',
+    },
+  }),
+);
 
-app.use(helmet.hsts({
-  force: true,
-  includeSubDomains: true,
-  maxAge: 63072000, // 2 years
-  preload: true
-}));
+app.use(
+  helmet.hsts({
+    force: true,
+    includeSubDomains: true,
+    maxAge: 63072000, // 2 years
+    preload: true,
+  }),
+);
 
 app.use(helmet.referrerPolicy({ policy: 'strict-origin-when-cross-origin' }));
 
-app.use(morgan(':remote-addr :remote-user :method :url :status :res[content-length] - :response-time ms'));
+app.use(
+  morgan(
+    ':remote-addr :remote-user :method :url :status :res[content-length] - :response-time ms',
+  ),
+);
 app.use('/favicon.ico', express.static('./favicon.ico'));
 
 app.use((req, res, next) => {
-  res.setHeader('Cache-Control', 'no-cache');
+  res.setHeader('Cache-Control', 's-maxage=600');
   req.isCurl = IS_CURL_RE.test(req.headers['user-agent']);
   next();
 });
@@ -69,22 +81,25 @@ app.get('/', (req, res) => {
 
   if (source === 1) {
     if (format.toLowerCase() === 'json') {
-      return getJSONData().then(result => {
-        return res.json(result);
-      }).catch(error => errorHandler(error, req, res));
+      return getJSONData()
+        .then((result) => {
+          return res.json(result);
+        })
+        .catch((error) => errorHandler(error, req, res));
     }
 
     return getCompleteTable({ isCurl, emojis, minimal, top })
-      .then(result => {
+      .then((result) => {
         return res.send(result);
-      }).catch(error => errorHandler(error, req, res));
+      })
+      .catch((error) => errorHandler(error, req, res));
   }
 
-  return getWorldoMetersTable({ isCurl, emojis, minimal, top, format})
-    .then(result => {
+  return getWorldoMetersTable({ isCurl, emojis, minimal, top, format })
+    .then((result) => {
       return res.send(result);
-    }).catch(error => errorHandler(error, req, res));
-
+    })
+    .catch((error) => errorHandler(error, req, res));
 });
 
 app.get('/updates', (req, res) => {
@@ -92,14 +107,18 @@ app.get('/updates', (req, res) => {
   const format = req.query.format ? req.query.format : '';
 
   if (format.toLowerCase() === 'json') {
-    return getLiveUpdates({ json: true, isCurl }).then(result => {
-      return res.json(result);
-    }).catch(error => errorHandler(error, req, res));
+    return getLiveUpdates({ json: true, isCurl })
+      .then((result) => {
+        return res.json(result);
+      })
+      .catch((error) => errorHandler(error, req, res));
   }
 
-  return getLiveUpdates({ json: false, isCurl }).then(result => {
-    return res.send(result);
-  }).catch(error => errorHandler(error, req, res));
+  return getLiveUpdates({ json: false, isCurl })
+    .then((result) => {
+      return res.send(result);
+    })
+    .catch((error) => errorHandler(error, req, res));
 });
 
 app.get(['/:country/graph', '/graph'], (req, res) => {
@@ -107,17 +126,17 @@ app.get(['/:country/graph', '/graph'], (req, res) => {
   const isCurl = req.isCurl;
   if (!country) {
     return getGraph({ isCurl })
-      .then(result => res.send(result))
-      .catch(error => errorHandler(error, req, res));
+      .then((result) => res.send(result))
+      .catch((error) => errorHandler(error, req, res));
   }
   const lookupObj = lookupCountry(country);
 
   if (!lookupObj) {
     return res.status(404).send(countryNotFound(isCurl));
   }
-  return getGraph({countryCode: lookupObj.iso2, isCurl })
-    .then(result => res.send(result))
-    .catch(error => errorHandler(error, req, res));
+  return getGraph({ countryCode: lookupObj.iso2, isCurl })
+    .then((result) => res.send(result))
+    .catch((error) => errorHandler(error, req, res));
 });
 
 app.get('/help', (req, res) => {
@@ -141,13 +160,13 @@ app.get('/states/:country', (req, res) => {
     return res.status(404).send(stateCountryNotFound(isCurl));
   }
   if (lookupObj.iso2 === 'US') {
-    return getUsaStats({ isCurl, minimal, top, format})
-      .then(result => {
+    return getUsaStats({ isCurl, minimal, top, format })
+      .then((result) => {
         return res.send(result);
-      }).catch(error => errorHandler(error, req, res));
+      })
+      .catch((error) => errorHandler(error, req, res));
   }
 });
-
 
 app.get('/:country', (req, res) => {
   const { country } = req.params;
@@ -159,15 +178,29 @@ app.get('/:country', (req, res) => {
 
   if (!country || country.toUpperCase() === 'ALL' || country.includes(',')) {
     if (format.toLowerCase() === 'json') {
-      return getWorldoMetersTable({ countryCode: country, isCurl, emojis, minimal, format }).then(result => {
-        return res.json(result);
-      }).catch(error => errorHandler(error, req, res));
+      return getWorldoMetersTable({
+        countryCode: country,
+        isCurl,
+        emojis,
+        minimal,
+        format,
+      })
+        .then((result) => {
+          return res.json(result);
+        })
+        .catch((error) => errorHandler(error, req, res));
     }
 
-    return getWorldoMetersTable({ countryCode: country, isCurl, emojis, minimal })
-      .then(result => {
+    return getWorldoMetersTable({
+      countryCode: country,
+      isCurl,
+      emojis,
+      minimal,
+    })
+      .then((result) => {
         return res.send(result);
-      }).catch(error => errorHandler(error, req, res));
+      })
+      .catch((error) => errorHandler(error, req, res));
   }
   if (source === 1) {
     const lookupObj = lookupCountry(country);
@@ -178,14 +211,17 @@ app.get('/:country', (req, res) => {
     const { iso2 } = lookupObj;
 
     if (format.toLowerCase() === 'json') {
-      return getJSONDataForCountry(iso2).then(result => {
-        return res.json(result);
-      }).catch(error => errorHandler(error, req, res));
+      return getJSONDataForCountry(iso2)
+        .then((result) => {
+          return res.json(result);
+        })
+        .catch((error) => errorHandler(error, req, res));
     }
     return getCountryTable({ countryCode: iso2, isCurl, emojis, minimal })
-      .then(result => {
+      .then((result) => {
         return res.send(result);
-      }).catch(error => errorHandler(error, req, res));
+      })
+      .catch((error) => errorHandler(error, req, res));
   }
 
   const lookupObj = lookupCountry(country);
@@ -196,10 +232,17 @@ app.get('/:country', (req, res) => {
 
   const { iso2 } = lookupObj;
 
-  return getWorldoMetersTable({ countryCode: iso2, isCurl, emojis, minimal, format })
-    .then(result => {
+  return getWorldoMetersTable({
+    countryCode: iso2,
+    isCurl,
+    emojis,
+    minimal,
+    format,
+  })
+    .then((result) => {
       return res.send(result);
-    }).catch(error => errorHandler(error, req, res));
+    })
+    .catch((error) => errorHandler(error, req, res));
 });
 
 app.listen(port, () => console.log(`Running on ${port}`));
